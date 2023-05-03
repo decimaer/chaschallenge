@@ -1,5 +1,11 @@
 #Backend API
 
+## Run in dev mode
+
+-  install config.env in api root folder with `NODE_ENV` set to `development`
+-  Run `npm install`
+-  Run `npm run dev`
+
 ## config.env
 
 ```
