@@ -14,7 +14,7 @@ before_script:
 
 stages:
   - build
-  - api-server
+  - test
 
 build:
   stage: build
@@ -25,21 +25,12 @@ build:
     paths:
       - api/node_modules
 
-api-server:
-  stage: api-server
+test:
+  stage: test
+  iamge: postman/newman:alpine
+  entrypoint: [""]
   script:
-    - cd api
-    - >-
-      NODE_ENV="development"
-      DATABASE_URL="mongodb://$MONGO_HOST"
-      PORT=8888
-      JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
-      JWT_EXPIRES_IN="30d"
-      npm run dev &
-    - echo "Waiting for API server to start..."
-    - sleep 10
-    - echo "Running newman tests..."
-    - >-
+      - |
       newman run
       -e ../testing/Chas_Challenge.postman_environment.json
       ../testing/Chas_Challenge.postman_collection.json
