@@ -31,7 +31,7 @@ test:
     name: postman/newman:alpine
     entrypoint: [""]
   script:
-      - |
+      - | 
         newman run
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
