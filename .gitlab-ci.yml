@@ -36,6 +36,10 @@ test:
     newman run
     -e testing/Chas_Challenge.postman_environment.json
     testing/Chas_Challenge.postman_collection.json
+  parallel:
+    matrix:
+      - BUILD: [build]
+      - TEST: [test]
   dependencies:
-    - build
+    - BUILD
     
