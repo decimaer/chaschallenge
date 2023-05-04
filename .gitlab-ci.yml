@@ -22,7 +22,7 @@ build:
    - cd api
    - npm install
   artifacts:
-    path:
+    paths:
       - "api/node_modules"
 
 api-server:
@@ -36,7 +36,7 @@ api-server:
       JWT_EXPIRES_IN="30d"
       npm run dev &
   artifacts:
-    path:
+    paths:
       - "api/node_modules"
   dependencies:
     - build
