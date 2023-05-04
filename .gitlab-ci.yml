@@ -20,6 +20,7 @@ build:
    - >-
     NODE_ENV="development"
     DATABASE_URL="mongodb://127.0.0.1"
+    PORT=8888
     JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
     JWT_EXPIRES_IN=0d
     npm run dev
