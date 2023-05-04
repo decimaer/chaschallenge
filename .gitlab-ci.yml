@@ -1,7 +1,7 @@
 image:
  name: node:slim
 
-before-script:
+before_script:
   - echo "first"
 
 stages:
