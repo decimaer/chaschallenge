@@ -2,7 +2,7 @@ image:
  name: node:slim
 
 before_script:
-  - echo "first"
+  - npm install -g nodemon
 
 stages:
   - build
