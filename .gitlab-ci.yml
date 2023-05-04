@@ -15,7 +15,6 @@ before_script:
 stages:
   - build
   - api-server
-  - test
 
 build:
   stage: build
@@ -39,17 +38,11 @@ api-server:
       npm run dev &
     - echo "Waiting for API server to start..."
     - sleep 10
-  dependencies:
-    - build
-
-api-test:
-  stage: test
-  script:
     - echo "Running newman tests..."
     - >-
       newman run
       -e testing/Chas_Challenge.postman_environment.json
       testing/Chas_Challenge.postman_collection.json
   dependencies:
-    - api-server
+    - build
     
