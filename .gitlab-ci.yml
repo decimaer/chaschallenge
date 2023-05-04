@@ -18,10 +18,10 @@ build:
    - cd api
    - npm install
    - >-
-   NODE_ENV = "development"
-   DATABASE_URL = "mongodb://127.0.0.1"
-   JWT_SECRET_KEY = "ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
-   JWT_EXPIRES_IN = 30d
+   NODE_ENV="development"
+   DATABASE_URL="mongodb://127.0.0.1"
+   JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
+   JWT_EXPIRES_IN= 0d
    npm run dev
 
 test:
