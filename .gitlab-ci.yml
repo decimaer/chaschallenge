@@ -1,6 +1,3 @@
-image:
- name: node:slim
- 
 services:
   - name: mongo:6.0
     alias: mongodb
@@ -8,15 +5,12 @@ services:
 variables:
   MONGO_HOST: mongodb
 
-before_script:
-  - apt update
-  - npm install -g nodemon newman
-
 stages:
   - build
   - test
 
 build:
+  image: node:slim
   stage: build
   script:
    - cd api
