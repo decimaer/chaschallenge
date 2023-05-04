@@ -32,7 +32,7 @@ api-server:
       PORT=8888
       JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
       JWT_EXPIRES_IN="30d"
-      npm run dev &
+      npm run dev
   dependencies:
     - build
 
