@@ -1,6 +1,9 @@
 image:
  name: node:slim
 
+before-script:
+  - echo "first"
+
 stages:
   - build
   - test
@@ -8,11 +11,11 @@ stages:
 build:
   stage: build
   script:
-   - pwd
-   - ls
+   - cd api
    - npm install
+   - npm run dev
 
 test:
   stage: test
   script:
-   - npm run dev
+   - echo "test"
