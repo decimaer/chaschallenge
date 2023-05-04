@@ -4,7 +4,6 @@ image:
 services:
   - name: mongo:6.0
     alias: mongodb
-    command: [start]
 
 variables:
   MONGO_HOST: mongodb
@@ -22,13 +21,12 @@ build:
   script:
    - cd api
    - npm install
-   - echo $MONGO_HOST
    - >-
     NODE_ENV="development"
     DATABASE_URL="mongodb://$MONGO_HOST"
     PORT=8888
     JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
-    JWT_EXPIRES_IN=0d
+    JWT_EXPIRES_IN="30d"
     npm run dev
 
 test:
