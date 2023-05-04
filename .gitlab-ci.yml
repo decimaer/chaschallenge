@@ -23,7 +23,7 @@ build:
    - npm install
   artifacts:
     paths:
-      - node_modules
+      - api/node_modules
 
 api-server:
   stage: test
