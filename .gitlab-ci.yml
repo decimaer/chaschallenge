@@ -6,8 +6,7 @@ services:
 
 before_script:
   - apt update
-  - npm install -g nodemon
-  - apt install -y newman
+  - npm install -g nodemon newman
 
 stages:
   - build
