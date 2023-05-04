@@ -2,7 +2,15 @@ image:
  name: node:slim
 
 stages:
+  - build
   - test
 
+build:
+  stage: build
+  script:
+   - npm install
+
 test:
-  script: echo test
+  stage: test
+  script:
+   - npm run dev
