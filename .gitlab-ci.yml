@@ -2,7 +2,7 @@ image:
  name: node:slim
 
 services:
-  name: mongo:6.0
+  - name: mongo:6.0
 
 before_script:
   - apt update
