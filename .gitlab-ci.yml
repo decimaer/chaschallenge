@@ -29,7 +29,7 @@ test:
   stage: test
   image:
     name: postman/newman:alpine
-    entrypoint: [""]
+    entrypoint: [""] 
   script:
       - | 
         newman run
