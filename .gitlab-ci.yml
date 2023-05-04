@@ -4,6 +4,8 @@ image:
 services:
   - name: mongo:6.0
     alias: mongodb
+  - name: node:slim
+    alias: api-server
 
 variables:
   MONGO_HOST: mongodb
@@ -36,17 +38,22 @@ api-server:
       JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
       JWT_EXPIRES_IN="30d"
       npm run dev &
-    - sleep 10
   dependencies:
     - build
 
 api-test:
   stage: test
   script:
+    - echo "Waiting for API server to start..."
+    - sleep 10
+    - echo "Running newman tests..."
     - >-
       newman run
       -e testing/Chas_Challenge.postman_environment.json
       testing/Chas_Challenge.postman_collection.json
+  services:
+    - name: api-server
+      alias: api-server
   dependencies:
     - api-server
     
