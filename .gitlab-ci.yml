@@ -28,6 +28,7 @@ build:
 api-server:
   stage: test
   script:
+    - cd api
     - >-
       NODE_ENV="development"
       DATABASE_URL="mongodb://$MONGO_HOST"
