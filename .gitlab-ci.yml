@@ -3,6 +3,7 @@ image:
 
 services:
   - name: mongo:6.0
+    command: [start]
 
 before_script:
   - apt update
