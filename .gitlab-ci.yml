@@ -19,16 +19,18 @@ build:
     paths:
       - api/node_modules
 
-test:
+api-server:
   stage: test
-  image:
-    name: postman/newman:alpine
-    entrypoint: [""] 
+  image: node:slim
   script:
-      - | 
-        newman run
-        -e ../testing/Chas_Challenge.postman_environment.json
-        ../testing/Chas_Challenge.postman_collection.json
-  dependencies:
-    - build
+    - cd api
+    - |
+      NODE_ENV="development"
+      DATABASE_URL="mongodb://$MONGO_HOST"
+      PORT=8888
+      JWT_SECRET_KEY="qWertyRandomString"
+      JWT_EXPIRES_IN="30d"
+      npm run dev &
+    - echo "Waiting for API Server to start..."
+    - sleep 10
     
