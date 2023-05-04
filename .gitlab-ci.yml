@@ -21,6 +21,9 @@ build:
   script:
    - cd api
    - npm install
+  artifacts:
+    paths:
+      - node_modules
 
 api-server:
   stage: test
