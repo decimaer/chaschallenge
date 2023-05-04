@@ -35,7 +35,7 @@ api-server:
       PORT=8888
       JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
       JWT_EXPIRES_IN="30d"
-      npm run dev
+      npm run dev &
   dependencies:
     - build
 
@@ -46,5 +46,6 @@ api-test:
       newman run
       -e testing/Chas_Challenge.postman_environment.json
       testing/Chas_Challenge.postman_collection.json
-  needs: [api-server]
+  dependencies:
+    - build
     
