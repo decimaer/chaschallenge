@@ -3,6 +3,7 @@ image:
  
 services:
   - name: mongo:6.0
+    alias: mongodb
     command: [start]
 
 before_script:
@@ -20,7 +21,7 @@ build:
    - npm install
    - >-
     NODE_ENV="development"
-    DATABASE_URL="mongodb://127.0.0.1"
+    DATABASE_URL="mongodb://mongodb"
     PORT=8888
     JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
     JWT_EXPIRES_IN=0d
