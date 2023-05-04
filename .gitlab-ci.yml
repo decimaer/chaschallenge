@@ -21,20 +21,31 @@ build:
   script:
    - cd api
    - npm install
-   - >-
-    NODE_ENV="development"
-    DATABASE_URL="mongodb://$MONGO_HOST"
-    PORT=8888
-    JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
-    JWT_EXPIRES_IN="30d"
-    npm run dev &
+  artifacts:
+    path:
+      - "api/node_modules"
 
-test:
+api-server:
   stage: test
   script:
-   - >-
-    newman run
-    -e testing/Chas_Challenge.postman_environment.json
-    testing/Chas_Challenge.postman_collection.json
-  needs: [build]
+    - >-
+      NODE_ENV="development"
+      DATABASE_URL="mongodb://$MONGO_HOST"
+      PORT=8888
+      JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
+      JWT_EXPIRES_IN="30d"
+      npm run dev &
+  artifacts:
+    path:
+      - "api/node_modules"
+  dependencies:
+    - build
+
+api-test:
+  stage: test
+  script:
+    - >-
+      newman run
+      -e testing/Chas_Challenge.postman_environment.json
+      testing/Chas_Challenge.postman_collection.json
     
