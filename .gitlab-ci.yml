@@ -1,8 +1,13 @@
 image:
  name: node:slim
 
+services:
+  name: mongo:6.0
+
 before_script:
+  - apt update
   - npm install -g nodemon
+  - apt install -y newman
 
 stages:
   - build
@@ -18,4 +23,6 @@ build:
 test:
   stage: test
   script:
-   - echo "test"
+   - newman run -e testing/Chas_Challenge.postman_environment.json testing/Chas_Challenge.postman_collection.json
+  depends:
+    - build
