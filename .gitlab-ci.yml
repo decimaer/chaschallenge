@@ -30,7 +30,7 @@ api-server:
   stage: api-server
   script:
     - cd api
-    - |
+    - >-
       NODE_ENV="development"
       DATABASE_URL="mongodb://$MONGO_HOST"
       PORT=8888
@@ -46,7 +46,7 @@ api-test:
   stage: test
   script:
     - echo "Running newman tests..."
-    - |
+    - >-
       newman run
       -e testing/Chas_Challenge.postman_environment.json
       testing/Chas_Challenge.postman_collection.json
