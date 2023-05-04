@@ -38,8 +38,8 @@ test:
     testing/Chas_Challenge.postman_collection.json
   parallel:
     matrix:
-      - BUILD: [build]
-      - TEST: [test]
+      - build: [build]
+      - test: [test]
   dependencies:
-    - BUILD
+    - build
     
