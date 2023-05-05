@@ -32,7 +32,7 @@ api-server:
         PORT=8888
         JWT_SECRET_KEY="qWertyRandomString"
         JWT_EXPIRES_IN="30d"
-        npm run dev &
+#npm run dev &
 
 api-test:
   stage: test
