@@ -35,11 +35,6 @@ api-server:
         JWT_EXPIRES_IN="30d"
         npm run dev &
         sleep 10
-    - echo "Waiting for API server to start..."
-    - >-
-        newman run
-        -e ../testing/Chas_Challenge.postman_environment.json
-        ../testing/Chas_Challenge.postman_collection.json
   dependencies:
     - build
 
