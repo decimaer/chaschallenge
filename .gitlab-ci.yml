@@ -34,6 +34,7 @@ api-test:
         JWT_SECRET_KEY="rOvIhkuJfRGuwsOwZNYP4TeglHPwFhe8"
         JWT_EXPIRES_IN="30d"
         npm run dev &
+        sleep 10
     - echo "Waiting for API server to start..."
     - >-
         newman run
