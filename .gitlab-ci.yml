@@ -32,7 +32,7 @@ api-test:
         NODE_ENV="development"
         DATABASE_URL="mongodb://$MONGO_HOST"
         PORT=8888
-        JWT_SECRET_KEY=rOvIhkuJfRGuwsOwZNYP4TeglHPwFhe8
+        JWT_SECRET_KEY="rOvIhkuJfRGuwsOwZNYP4TeglHPwFhe8"
         JWT_EXPIRES_IN="30d"
         npm run dev &
         sleep 10
@@ -43,3 +43,18 @@ api-test:
         ../testing/Chas_Challenge.postman_collection.json
   dependencies:
     - build
+
+deploy:
+  stage: deploy 
+  image: docker:23.0.6
+  services:
+    - docker:23.0.6-dind-alpine3.17
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    # use previous image as a cache to speedup build process
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    # use the commit sha to tag the image
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
