@@ -33,6 +33,16 @@ api-server:
         JWT_SECRET_KEY="qWertyRandomString"
         JWT_EXPIRES_IN="30d"
         npm run dev &
+
+api-test:
+  stage: test
+  image: postman/newman:alpine
+  script:
     - echo "Waiting for API Server to start..."
     - sleep 10
-    
+    - >-
+        newman run
+        -e testing/Chas_Challenge.postman_environment.json
+        testing/Chas_Challenge.postman_collection.json
+  dependencies:
+    - api-server
