@@ -21,10 +21,10 @@ build:
       - api/node_modules
     expire_in: 1 week
 
-api-test:
+api-server:
   stage: test
   before_script:
-    - npm install -g nodemon newman
+    - npm install -g nodemon
   script:
     - cd api
     - >-
@@ -40,3 +40,17 @@ api-test:
         newman run
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
+  dependencies:
+    - build
+
+api-test:
+  stage: test
+  before_script:
+    - npm install -g newman
+  script:
+    - echo "Waiting for API server to start..."
+    - >-
+        newman run
+        -e ../testing/Chas_Challenge.postman_environment.json
+        ../testing/Chas_Challenge.postman_collection.json
+  needs: [api-server]
