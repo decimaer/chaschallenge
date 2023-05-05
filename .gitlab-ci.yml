@@ -19,6 +19,7 @@ build:
   artifacts:
     paths:
       - api/node_modules
+    expire_in: 1 week
 
 api-test:
   stage: test
@@ -30,7 +31,7 @@ api-test:
         NODE_ENV="development"
         DATABASE_URL="mongodb://$MONGO_HOST"
         PORT=8888
-        JWT_SECRET_KEY="qWertyRandomString"
+        JWT_SECRET_KEY="rOvIhkuJfRGuwsOwZNYP4TeglHPwFhe8"
         JWT_EXPIRES_IN="30d"
         npm run dev &
         sleep 10
