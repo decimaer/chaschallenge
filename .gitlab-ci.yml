@@ -35,7 +35,6 @@ api-test:
         npm run dev &
     - >-
         echo "Waiting for API server to start..."
-        sleep 10
         newman run
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
