@@ -23,4 +23,4 @@ jobs:
         GITLAB_USERNAME: "Sm0rezDev"
         GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD }} # Token is valid till the next month
         GITLAB_PROJECT_ID: "45714880"
-        GITHUB_TOKEN: ${{ secrets._GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
