@@ -2,13 +2,14 @@ import mongoose, { Document } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
-////NOT FINISHED////
-/* interface UserInterface extends Document {
-	name: string;
-	email: string;
-	password: string;
-	passwordConfirm: string | undefined;
-} */
+interface UserInterface extends Document {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirm: string | undefined;
+    agreeTerms: boolean;
+    role: string;
+}
 
 const userSchema = new mongoose.Schema(
 	/* <UserInterface> */ {
@@ -24,11 +25,20 @@ const userSchema = new mongoose.Schema(
 		password: {
 			type: String,
 			required: [true, "Password is required."],
+			minlength: [8, "Password must be at least 8 characters long"],
+			match: [/^(?=.*[!@#$%^&*])/,
+            "Password must contain at least one special character (!@#$%^&*)"],
 			select: false, //Does not read it when getting the data from the DB
 		},
 		passwordConfirm: {
 			type: {}, //set 'any' type FIXME!
 			required: [true, "PasswordConfirm is required."],
+			validate: {
+				validator: function (this: UserInterface, pass: string): boolean {
+					return pass === this.password;
+				},
+				message: "Passwords do not match!",
+			},
 			/* validate: {
 			validator: function (pass: string): boolean {
 				return pass === this.password;
@@ -44,6 +54,8 @@ const userSchema = new mongoose.Schema(
 		},
 		role: {
 			type: String,
+			enum: ['admin', 'user'],
+        default: 'user',
 		},
 	},
 	{
@@ -53,6 +65,9 @@ const userSchema = new mongoose.Schema(
 
 //Before "save", hash the password with bcrypt
 userSchema.pre("save", async function (next) {
+	if (!this.isModified('password')) {
+        return next();
+    }
 	//TODO: add only run if password has been modified
 
 	this.password = await bcrypt.hash(this.password, 12);
