@@ -46,6 +46,6 @@ api-test:
     - echo "Waiting for API server to start..."
     - >-
         newman run
-        -e ../testing/Chas_Challenge.postman_environment.json
-        ../testing/Chas_Challenge.postman_collection.json
+        -e testing/Chas_Challenge.postman_environment.json
+        testing/Chas_Challenge.postman_collection.json
   needs: [api-server]
