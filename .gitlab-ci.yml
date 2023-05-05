@@ -1,3 +1,5 @@
+image: node:19-alpine3.16
+
 services:
   - name: mongo:6.0
     alias: mongodb
@@ -10,7 +12,6 @@ stages:
   - test
 
 build:
-  image: node:slim
   stage: build
   script:
    - cd api
@@ -21,7 +22,6 @@ build:
 
 api-test:
   stage: test
-  image: node:slim
   before_script:
     - npm install -g nodemon newman
   script:
