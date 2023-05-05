@@ -22,6 +22,8 @@ build:
 api-server:
   stage: test
   image: node:slim
+  before_script:
+    - npm install -g nodemon
   script:
     - cd api
     - |
