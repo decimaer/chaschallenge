@@ -23,7 +23,7 @@ api-server:
   stage: test
   image: node:slim
   before_script:
-    - npm install -g nodemon
+    - npm install -g nodemon newman
   script:
     - cd api
     - >-
@@ -32,18 +32,22 @@ api-server:
         PORT=8888
         JWT_SECRET_KEY="qWertyRandomString"
         JWT_EXPIRES_IN="30d"
-#npm run dev &
-
-api-test:
-  stage: test
-  image:
-    name: postman/newman:alpine
-    entrypoint: [""]
-  script:
-    - echo "Waiting for API Server to start..."
-    - sleep 10
+        npm run dev &
     - >-
         newman run
         -e testing/Chas_Challenge.postman_environment.json
         testing/Chas_Challenge.postman_collection.json
-  needs: [api-server]
+
+# api-test:
+#   stage: test
+#   image:
+#     name: postman/newman:alpine
+#     entrypoint: [""]
+#   script:
+#     - echo "Waiting for API Server to start..."
+#     - sleep 10
+#     - >-
+#         newman run
+#         -e testing/Chas_Challenge.postman_environment.json
+#         testing/Chas_Challenge.postman_collection.json
+#   needs: [api-server]
