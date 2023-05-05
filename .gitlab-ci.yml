@@ -21,10 +21,10 @@ build:
       - api/node_modules
     expire_in: 1 week
 
-api-server:
+api-test:
   stage: test
   before_script:
-    - npm install -g nodemon
+    - npm install -g nodemon newman
   script:
     - cd api
     - >-
@@ -35,17 +35,10 @@ api-server:
         JWT_EXPIRES_IN="30d"
         npm run dev &
         sleep 10
-  dependencies:
-    - build
-
-api-test:
-  stage: test
-  before_script:
-    - npm install -g newman
-  script:
     - echo "Waiting for API server to start..."
     - >-
         newman run
-        -e testing/Chas_Challenge.postman_environment.json
-        testing/Chas_Challenge.postman_collection.json
-  needs: [api-server]
+        -e ../testing/Chas_Challenge.postman_environment.json
+        ../testing/Chas_Challenge.postman_collection.json
+  dependencies:
+    - build
