@@ -19,7 +19,7 @@ build:
     paths:
       - api/node_modules
 
-api-server:
+api-test:
   stage: test
   image: node:slim
   before_script:
@@ -35,8 +35,8 @@ api-server:
         npm run dev &
     - >-
         newman run
-        -e testing/Chas_Challenge.postman_environment.json
-        testing/Chas_Challenge.postman_collection.json
+        -e ../testing/Chas_Challenge.postman_environment.json
+        ../testing/Chas_Challenge.postman_collection.json
 
 # api-test:
 #   stage: test
