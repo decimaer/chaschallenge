@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true || github.ref == 'refs/heads/deployment'
+    if: github.event.pull_request.merged == true || github.head_ref
     steps:
     - uses: actions/checkout@v1
     - name: Mirror + trigger CI
