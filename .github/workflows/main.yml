@@ -18,8 +18,7 @@ jobs:
     - name: Mirror + trigger CI
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
-        args: "https://gitlab.com/Sm0rezDev/chaschallenge"
-        run: git checkout -b deployment
+        args: "https://gitlab.com/Sm0rezDev/chaschallenge ."
       env:
         FOLLOW_TAGS: "false"
         FORCE_PUSH: "false"
