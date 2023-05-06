@@ -19,12 +19,7 @@ jobs:
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
         args: "https://gitlab.com/Sm0rezDev/chaschallenge"
-    - name: New branch
-      run: git checkout -b deployment
-    - name: Copy content of source to branche
-      run: git push origin HEAD:deployment
-    - name: push
-      run: git push origin branch deployment
+        run: git checkout -b deployment
       env:
         FOLLOW_TAGS: "false"
         FORCE_PUSH: "false"
