@@ -1,10 +1,6 @@
 name: Mirror and run GitLab CI
 
-on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
+on: [push]
 
 jobs:
   build:
@@ -13,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Mirror + trigger CI
-      uses: SvanBoxel/gitlab-mirror-and-ci-action@0.2
+      uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
         args: "https://gitlab.com/Sm0rezDev/chaschallenge"
       env:
