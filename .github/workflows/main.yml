@@ -12,13 +12,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true || github.ref == 'refs/heads/main'
+    if: github.event.pull_request.merged == true
     steps:
     - uses: actions/checkout@v1
     - name: Mirror + trigger CI
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
         args: "https://gitlab.com/Sm0rezDev/chaschallenge"
+        ref: deployment
       env:
         FOLLOW_TAGS: "false"
         FORCE_PUSH: "false"
