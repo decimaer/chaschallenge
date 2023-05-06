@@ -1,15 +1,10 @@
 name: Mirror and run GitLab CI
 
-on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
     - uses: actions/checkout@v1
     - name: Mirror + trigger CI
