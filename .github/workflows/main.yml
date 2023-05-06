@@ -2,8 +2,9 @@ name: Mirror and run GitLab CI
 
 on:
   pull_request:
-    types: [opened, closed]
+    types: [closed]
     branches:
+      - main
       - deployment
   # push:
   #   branches:
