@@ -1,6 +1,10 @@
 name: Mirror and run GitLab CI
 
-on: [push]
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - deployment
 
 jobs:
   build:
