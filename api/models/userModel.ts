@@ -85,3 +85,4 @@ const createUser = async () => {
 }
 
 createUser();
+export default mongoose.model<UserInterface>("User", userSchema);
