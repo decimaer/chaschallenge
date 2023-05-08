@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { ObjectId, Query } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
-////NOT FINISHED////
-interface User extends Document {
+interface UserDocument extends Document {
+	// _id: ObjectId | string;
 	name: string;
 	email: string;
 	password: string;
@@ -14,9 +14,10 @@ interface User extends Document {
 		currentPassword: string,
 		originalPassword: string
 	) => boolean;
+	// post: () => void;
 }
 
-const userSchema = new mongoose.Schema<User>(
+const userSchema = new mongoose.Schema<UserDocument>(
 	{
 		name: {
 			type: String,
@@ -67,6 +68,12 @@ userSchema.pre("save", async function (next) {
 	this.passwordConfirm = undefined;
 	next();
 });
+
+// Funkar ej pga typ  :((((((
+/* userSchema.post("find", function (next) {
+	this._id = this._id.toString();
+	next();
+}); */
 
 userSchema.methods.comparePasswords = async function (
 	currentPassword: string,
