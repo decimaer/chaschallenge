@@ -1,0 +1,8 @@
+image:
+ name: node:slim
+
+stages:
+  - test
+
+test:
+  script: echo test
