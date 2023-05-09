@@ -56,11 +56,11 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/users", userRouter);
 
-/* app.all("*", (req, res, next) => {
+app.all("*", (req, res, next) => {
 	res.status(404).json({
 		status: "fail",
 		message: `Can't find ${req.originalUrl} on this server!`,
 	});
-}); */
+});
 
 export default app;
