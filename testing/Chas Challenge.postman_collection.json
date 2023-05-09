@@ -6,13 +6,25 @@
 	},
 	"item": [
 		{
-			"name": "Create New User",
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"jwt\", pm.response.json().token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"testing\",\n    \"email\": \"hampus2@dufbegr.se\",\n    \"password\": \"asdf\"\n\n}",
+					"raw": "{\n    \"email\": \"name@test.se\",\n    \"password\": \"asdfasdf!\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,14 +32,43 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8888/api/users",
+					"raw": "{{URL}}/api/users/login",
 					"host": [
-						"localhost"
+						"{{URL}}"
 					],
-					"port": "8888",
 					"path": [
 						"api",
-						"users"
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/users/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users",
+						""
 					]
 				}
 			},
@@ -39,11 +80,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8888/api/users/64510eaa9d7fd49089777fbf",
+					"raw": "{{URL}}/api/users/64510eaa9d7fd49089777fbf",
 					"host": [
-						"localhost"
+						"{{URL}}"
 					],
-					"port": "8888",
 					"path": [
 						"api",
 						"users",
@@ -54,40 +94,27 @@
 			"response": []
 		},
 		{
-			"name": "Delete User",
+			"name": "Create New User",
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Name\",\n    \"email\": \"name@test.se\",\n    \"password\": \"asdfasdf!\",\n    \"passwordConfirm\": \"asdfasdf!\",\n    \"agreeTerms\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8888/api/users/64510994e304febeb5757821",
+					"raw": "{{URL}}/api/users",
 					"host": [
-						"localhost"
+						"{{URL}}"
 					],
-					"port": "8888",
 					"path": [
 						"api",
-						"users",
-						"64510994e304febeb5757821"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get All Users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8888/api/users/",
-					"host": [
-						"localhost"
-					],
-					"port": "8888",
-					"path": [
-						"api",
-						"users",
-						""
+						"users"
 					]
 				}
 			},
@@ -96,11 +123,21 @@
 		{
 			"name": "Update User Data",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"asdasdasd\"\n}",
+					"raw": "{\n    \"email\": \"asdasdasd@asd.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -108,15 +145,43 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8888/api/users/64510a4684308f1b087d054a",
+					"raw": "{{URL}}/api/users/64560f36d741b8722e503bcc",
 					"host": [
-						"localhost"
+						"{{URL}}"
 					],
-					"port": "8888",
 					"path": [
 						"api",
 						"users",
-						"64510a4684308f1b087d054a"
+						"64560f36d741b8722e503bcc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/users/64510994e304febeb5757821",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"64510994e304febeb5757821"
 					]
 				}
 			},
