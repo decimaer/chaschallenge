@@ -34,7 +34,7 @@ export const logInUser: middlewareType = async (req, res, next) => {
 		});
 	} catch (error: any) {
 		console.log(error);
-		res.status(400).json({
+		res.status(401).json({
 			status: "fail",
 			message: error.message,
 		});
@@ -42,6 +42,30 @@ export const logInUser: middlewareType = async (req, res, next) => {
 };
 
 export const authUser: middlewareType = async (req, res, next) => {
-	console.log(req.headers.authorization);
-	next();
+	try {
+		console.log(req.headers.authorization);
+		const token = req.headers.authorization?.split(" ")[1];
+
+		if (!token) throw new Error("You have not logged in!");
+
+		interface JwtPayloadASDF extends jwt.JwtPayload {
+			id: string;
+		}
+
+		const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET_KEY!); // FIXME type for decodedToken not working
+
+		const user = await User.findById(decodedToken.id);
+
+		if (!user) throw new Error("This user is not valid.");
+
+		// TODO add check if user has changed password
+
+		next();
+	} catch (error: any) {
+		console.log(error);
+		res.status(401).json({
+			status: "fail",
+			message: error.message,
+		});
+	}
 };

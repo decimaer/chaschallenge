@@ -16,7 +16,7 @@ router
 router
 	.route("/:id")
 	.get(userController.getUser)
-	.patch(userController.updateUser)
-	.delete(userController.deleteUser);
+	.patch(authController.authUser, userController.updateUser)
+	.delete(authController.authUser, userController.deleteUser);
 
 export default router;
