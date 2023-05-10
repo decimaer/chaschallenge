@@ -1,8 +1,35 @@
 image:
  name: node:slim
+ 
+services:
+  - name: mongo:6.0
+    command: [start]
+
+before_script:
+  - apt update
+  - npm install -g nodemon newman
 
 stages:
+  - build
   - test
 
+build:
+  stage: build
+  script:
+   - cd api
+   - npm install
+   - >-
+    NODE_ENV="development"
+    DATABASE_URL="mongodb://127.0.0.1"
+    PORT=8888
+    JWT_SECRET_KEY="ZT4X3n2pgTejYYUjQQbrlemEuhPjIWAl"
+    JWT_EXPIRES_IN=0d
+    npm run dev
+
 test:
-  script: echo test
+  stage: test
+  script:
+   - newman run -e testing/Chas_Challenge.postman_environment.json testing/Chas_Challenge.postman_collection.json
+  dependencies:
+    - build
+    
