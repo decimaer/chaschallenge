@@ -25,6 +25,8 @@ build:
 
 validation:
   stage: lint
+  before_script:
+    - cd api
   script:
     - npm run lint
   dependencies:
@@ -38,8 +40,8 @@ api-test:
     - export PORT=8888
     - export JWT_EXPIRES_IN="30d"  
     - npm install -g nodemon newman
-  script:
     - cd api
+  script:
     - npm run dev > server.log & sleep 10
     - echo "Waiting for API server to start..."
     - >-
