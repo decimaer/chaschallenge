@@ -12,7 +12,7 @@ stages:
   - test
   - package
 
-build:
+api:
   stage: build
   script:
    - cd api
@@ -22,22 +22,21 @@ build:
       - api/node_modules
     expire_in: 1 week
 
-validation:
+api-validation:
   stage: test
   before_script:
     - cd api
   script:
     - npm run lint
   dependencies:
-    - build
+    - api
   allow_failure:
     exit_codes:
       - 1
 
-api-test:
+api-newman-test:
   stage: test
   before_script:
-    - export DIR_STATIC_FILES="../client/"
     - export DATABASE_URL="mongodb://$MONGO_HOST"
     - export PORT=8888
     - export JWT_EXPIRES_IN="30d"  
@@ -51,10 +50,29 @@ api-test:
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
   dependencies:
-    - build
+    - api
   artifacts:
     paths:
       - api/server.log
+
+client:
+  stage: build
+  script:
+   - cd client
+   - npm install
+  artifacts:
+    paths:
+      - api/node_modules
+    expire_in: 1 week
+
+client-validation:
+  stage: test
+  before_script:
+    - cd client
+  script:
+    - npm run lint
+  dependencies:
+    - client
 
 package:
   stage: package 
