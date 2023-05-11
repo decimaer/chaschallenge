@@ -16,7 +16,11 @@ router
 router
 	.route("/:id")
 	.get(userController.getUser)
-	.patch(authController.authUser, userController.updateUser)
+	.patch(
+		authController.authUser,
+		authController.setPrivilege("user"),
+		userController.updateUser
+	)
 	.delete(authController.authUser, userController.deleteUser);
 
 export default router;

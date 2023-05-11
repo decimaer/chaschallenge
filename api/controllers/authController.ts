@@ -69,3 +69,26 @@ export const authUser: middlewareType = async (req, res, next) => {
 		});
 	}
 };
+
+export const setPrivilege = (role: "user" | "admin") => {
+	return (req, res, next) => {
+		try {
+			if (!role)
+				throw new Error(
+					"You do not have permission to perform this action."
+				);
+
+			if (role === "user") {
+			}
+
+			if (role === "admin") {
+			}
+		} catch (error: any) {
+			res.status(403).json({
+				status: "fail",
+				message: error.message,
+			});
+		}
+		next();
+	};
+};
