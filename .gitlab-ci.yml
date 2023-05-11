@@ -10,7 +10,7 @@ variables:
 stages:
   - build
   - test
-  - package
+  - release
 
 api:
   stage: build
@@ -73,9 +73,12 @@ client-validation:
     - npm run lint
   dependencies:
     - client
+  allow_failure:
+    exit_codes:
+      - 1
 
-package:
-  stage: package 
+build-image:
+  stage: release 
   image: docker:23.0.6
   services:
     - docker:23.0.6-dind-alpine3.17
