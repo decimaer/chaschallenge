@@ -9,6 +9,7 @@ variables:
 
 stages:
   - build
+  - lint
   - test
   - deploy
 
@@ -22,15 +23,20 @@ build:
       - api/node_modules
     expire_in: 1 week
 
+validation:
+  stage: lint
+  script:
+    - npm run lint
+  dependencies:
+    - build
+
 api-test:
   stage: test
   before_script:
-    - >-
-        export NODE_ENV="development"
-        export DATABASE_URL="mongodb://$MONGO_HOST"
-        export PORT=8888
-        export JWT_SECRET_KEY="qWertyRandomString"
-        export JWT_EXPIRES_IN="30d"  
+    - export DIR_STATIC_FILES="../client"
+    - export DATABASE_URL="mongodb://$MONGO_HOST"
+    - export PORT=8888
+    - export JWT_EXPIRES_IN="30d"  
     - npm install -g nodemon newman
   script:
     - cd api
@@ -41,7 +47,7 @@ api-test:
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
   dependencies:
-    - build
+    - validation
   artifacts:
     paths:
       - api/server.log
