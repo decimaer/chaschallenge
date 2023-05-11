@@ -29,7 +29,7 @@ api-test:
         export NODE_ENV="development"
         export DATABASE_URL="mongodb://$MONGO_HOST"
         export PORT=8888
-        export JWT_SECRET_KEY=""
+        export JWT_SECRET_KEY="qWertyRandomString"
         export JWT_EXPIRES_IN="30d"  
     - npm install -g nodemon newman
   script:
@@ -44,7 +44,7 @@ api-test:
     - build
   artifacts:
     paths:
-      - api
+      - api/server.log
 
 deploy:
   stage: deploy 
