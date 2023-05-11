@@ -1,0 +1,4 @@
+api/*.env
+api/node_modules
+api/*.md
+api/.eslintrc.json
