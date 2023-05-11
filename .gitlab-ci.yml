@@ -9,7 +9,6 @@ variables:
 
 stages:
   - build
-  - linting
   - test
   - package
 
@@ -24,11 +23,12 @@ build:
     expire_in: 1 week
 
 validation:
-  stage: linting
+  stage: test
   before_script:
     - cd api
   script:
     - npm run lint
+  needs: []
   dependencies:
     - build
   allow_failure:
@@ -38,7 +38,7 @@ validation:
 api-test:
   stage: test
   before_script:
-    - export DIR_STATIC_FILES="../client"
+    - export DIR_STATIC_FILES="../client/"
     - export DATABASE_URL="mongodb://$MONGO_HOST"
     - export PORT=8888
     - export JWT_EXPIRES_IN="30d"  
@@ -51,9 +51,9 @@ api-test:
         newman run
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
+  needs: []
   dependencies:
     - build
-    - validation
   artifacts:
     paths:
       - api/server.log
