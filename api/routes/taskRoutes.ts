@@ -5,18 +5,22 @@ import * as authController from "../controllers/authController";
 
 const router = express.Router();
 
-router.route("/");
-
 router
-	.route("/:id")
-	// id should be id of task and not user, however, this breaks setPrivilege
+	.route("/")
 	.post(
 		authController.authUser,
 		authController.setPrivilege("self"),
 		taskController.createTask
-	)
+	);
+
+router
+	.route("/:id")
 	.get()
-	.delete();
+	.delete(
+		authController.authUser,
+		authController.setPrivilege("self"),
+		taskController.deleteTask
+	);
 
 router.route("/top-three").get();
 
