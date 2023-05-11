@@ -41,6 +41,7 @@ api-test:
     - export DIR_STATIC_FILES="../client"
     - export DATABASE_URL="mongodb://$MONGO_HOST"
     - export PORT=8888
+    - export JWT_SECRET_KEY=$JWT_SECRET_KEY
     - export JWT_EXPIRES_IN="30d"  
     - npm install -g nodemon newman
     - cd api
@@ -73,4 +74,3 @@ package:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:latest
   when: manual
-  
