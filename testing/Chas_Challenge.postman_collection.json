@@ -6,6 +6,33 @@
 	},
 	"item": [
 		{
+			"name": "Create New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Name\",\n    \"email\": \"name@test.se\",\n    \"password\": \"asdfasdf!\",\n    \"passwordConfirm\": \"asdfasdf!\",\n    \"agreeTerms\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Login User",
 			"event": [
 				{
@@ -88,33 +115,6 @@
 						"api",
 						"users",
 						"64510eaa9d7fd49089777fbf"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create New User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Test Name\",\n    \"email\": \"name@test.se\",\n    \"password\": \"asdfasdf!\",\n    \"passwordConfirm\": \"asdfasdf!\",\n    \"agreeTerms\": true\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/api/users",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users"
 					]
 				}
 			},
