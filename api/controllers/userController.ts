@@ -1,12 +1,18 @@
 // Importing necessary dependencies
-import { User } from "../models/userModel";
+import User from "../models/userModel";
 import { middlewareType } from "../types/expressTypes";
 
 // Create a new user
 export const createUser: middlewareType = async (req, res, next) => {
 	try {
 		// Use the User model to create a new user from the request body
-		const newUser = await User.create(req.body);
+		const newUser = await User.create({
+			name: req.body.name,
+			email: req.body.email,
+			password: req.body.password,
+			passwordConfirm: req.body.passwordConfirm,
+			agreeTerms: true,
+		 });
 
 		console.log(newUser); // Log the new user to the console for debugging purposes
 

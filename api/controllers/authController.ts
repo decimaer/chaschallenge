@@ -1,5 +1,5 @@
 import { middlewareType } from "../types/expressTypes";
-import { User } from "../models/userModel";
+import User  from "../models/userModel";
 import jwt from "jsonwebtoken";
 
 const signToken = (id: string) => {
