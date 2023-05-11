@@ -34,7 +34,7 @@ api-test:
     - npm install -g nodemon newman
   script:
     - cd api
-    - npm run dev & sleep 10
+    - npm run dev > server.log & sleep 10
     - echo "Waiting for API server to start..."
     - >-
         newman run
@@ -42,6 +42,9 @@ api-test:
         ../testing/Chas_Challenge.postman_collection.json
   dependencies:
     - build
+  artifacts:
+    paths:
+      - api
 
 deploy:
   stage: deploy 
