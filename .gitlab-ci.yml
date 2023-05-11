@@ -28,7 +28,6 @@ validation:
     - cd api
   script:
     - npm run lint
-  needs: []
   dependencies:
     - build
   allow_failure:
