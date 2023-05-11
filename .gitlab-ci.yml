@@ -62,7 +62,7 @@ client:
    - npm install
   artifacts:
     paths:
-      - api/node_modules
+      - client/node_modules
     expire_in: 1 week
 
 client-validation:
