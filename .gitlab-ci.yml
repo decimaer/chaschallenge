@@ -25,17 +25,16 @@ build:
 api-test:
   stage: test
   before_script:
+    - >-
+        export NODE_ENV="development"
+        export DATABASE_URL="mongodb://$MONGO_HOST"
+        export PORT=8888
+        export JWT_SECRET_KEY="qWertyRandomString"
+        export JWT_EXPIRES_IN="30d"  
     - npm install -g nodemon newman
   script:
     - cd api
-    - >-
-        NODE_ENV="development"
-        DATABASE_URL="mongodb://$MONGO_HOST"
-        PORT=8888
-        JWT_SECRET_KEY="rOvIhkuJfRGuwsOwZNYP4TeglHPwFhe8"
-        JWT_EXPIRES_IN="30d"
-        npm run dev &
-        sleep 10
+    - npm run dev & sleep 10
     - echo "Waiting for API server to start..."
     - >-
         newman run
