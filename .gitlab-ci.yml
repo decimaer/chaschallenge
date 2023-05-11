@@ -38,6 +38,7 @@ validation:
 api-test:
   stage: test
   before_script:
+    - export NODE_ENV=$NODE_ENV
     - export DIR_STATIC_FILES="../client"
     - export DATABASE_URL="mongodb://$MONGO_HOST"
     - export PORT=8888
