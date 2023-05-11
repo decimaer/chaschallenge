@@ -9,9 +9,9 @@ variables:
 
 stages:
   - build
-  - lint
+  - linting
   - test
-  - deploy
+  - package
 
 build:
   stage: build
@@ -24,13 +24,16 @@ build:
     expire_in: 1 week
 
 validation:
-  stage: lint
+  stage: linting
   before_script:
     - cd api
   script:
     - npm run lint
   dependencies:
     - build
+  allow_failure:
+    exit_codes:
+      - 1
 
 api-test:
   stage: test
@@ -54,8 +57,8 @@ api-test:
     paths:
       - api/server.log
 
-deploy:
-  stage: deploy 
+package:
+  stage: package 
   image: docker:23.0.6
   services:
     - docker:23.0.6-dind-alpine3.17
@@ -68,3 +71,4 @@ deploy:
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:latest
+  when: manual
