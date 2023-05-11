@@ -1,14 +1,15 @@
 # MongoDB
 FROM mongo:6.0
 
-# Web server
-FROM nginx:latest
-
-# Backend
+# Runtime
 FROM node:19-alpine3.16
 
+WORKDIR /app
 
-EXPOSE 8080
-EXPOSE 27017
+COPY api .
 
-CMD nginx -g "daemon off;"
+EXPOSE 8888
+
+RUN npm install
+
+CMD ["npm", "run", "server.ts"]
