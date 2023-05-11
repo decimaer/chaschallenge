@@ -22,11 +22,14 @@ const userSchema = new mongoose.Schema<UserDocument>(
 		name: {
 			type: String,
 			required: [true, "Name is required."],
+			unique: true,
+			validate: [validator.isEmail, "Please provide a valid email!"]
 		},
 		email: {
 			type: String,
 			required: [true, "Email is required."],
 			validate: [validator.isEmail, "Please provide a valid email!"],
+			unique: true
 		},
 		password: {
 			type: String,
@@ -48,6 +51,12 @@ const userSchema = new mongoose.Schema<UserDocument>(
 				true,
 				"Please agree to the terms and conditions to use this service!",
 			],
+			validate: {
+				validator: function(v: boolean): boolean {
+					return v === true;
+				},
+				message: "You must agree to the terms and conditions!"
+			},
 		},
 		role: {
 			type: String,
