@@ -12,4 +12,4 @@ EXPOSE 8888
 
 RUN npm install
 
-CMD ["npm", "run", "server.ts"]
+CMD ["npm", "run", "dev"]
