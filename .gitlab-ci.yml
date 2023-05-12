@@ -98,6 +98,6 @@ build-image:
 
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_PROJECT_NAME:$VERSION
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_PROJECT_NAME:latest
-    - docker push $CI_PROJECT_NAME:$VERSION
-    - docker push $CI_PROJECT_NAME:latest
-  when: manual
+
+    - docker push $CI_REGISTRY_IMAGE:$VERSION
+    - docker push $CI_REGISTRY_IMAGE:latest
