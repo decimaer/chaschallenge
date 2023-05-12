@@ -88,10 +88,11 @@ build-image:
     VERSION: dev-$CI_COMMIT_TAG
   script:
     # use previous image as a cache to speedup build process
-    - docker pull $CI_PROJECT_NAME:latest || true
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
     # use the commit sha to tag the image
-    - docker build --cache-from $CI_PROJECT_NAME:latest -t $CI_PROJECT_NAME:$CI_COMMIT_SHA -t $CI_PROJECT_NAME:latest .
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest -t $CI_PROJECT_NAME:$CI_COMMIT_SHA -t $CI_PROJECT_NAME:latest .
     - docker tag $CI_PROJECT_NAME:$CI_COMMIT_SHA $CI_PROJECT_NAME:$VERSION
     - docker tag $CI_PROJECT_NAME:$CI_COMMIT_SHA $CI_PROJECT_NAME:latest
-    - docker push $CI_PROJECT_NAME:$VERSION
-    - docker push $CI_PROJECT_NAME:latest
+    - docker push $CI_REGISTRY_IMAGE:$VERSION
+    - docker push $CI_REGISTRY_IMAGE:latest
+  when: manual
