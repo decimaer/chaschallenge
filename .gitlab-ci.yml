@@ -40,7 +40,7 @@ api-newman-test:
     - export DATABASE_URL="mongodb://$MONGO_HOST"
     - export PORT=8888
     - export JWT_EXPIRES_IN="30d"  
-    - npm install -g nodemon newman
+    - npm install -g newman
     - cd api
   script:
     - npm run dev > server.log & sleep 10
@@ -84,11 +84,15 @@ build-image:
     - docker:23.0.6-dind-alpine3.17
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  variables:
+    VERSION: testing
   script:
     # use previous image as a cache to speedup build process
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     # use the commit sha to tag the image
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -t $CI_REGISTRY_IMAGE:latest .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$VERSION
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:$VERSION
+    - docker push $CI_REGISTRY_IMAGE:latest
   when: manual
