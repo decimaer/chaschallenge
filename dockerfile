@@ -1,15 +1,12 @@
-# MongoDB
-FROM mongo:6.0
-
-# Runtime
+# JS Runtime
 FROM node:19-alpine3.16
 
-WORKDIR /app
-
+WORKDIR /api
 COPY api .
+
+RUN npm install
+RUN npm install pm2
 
 EXPOSE 8888
 
-RUN npm install
-
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "prod"]
