@@ -89,6 +89,6 @@ build-image:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     # use the commit sha to tag the image
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE_PACKAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE_PACKAGE:$CI_COMMIT_SHA
   when: manual
