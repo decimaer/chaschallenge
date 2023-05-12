@@ -6,6 +6,7 @@ COPY api .
 
 RUN npm install
 RUN npm install pm2
+RUN npx pm2 install typescript
 
 EXPOSE 8888
 
