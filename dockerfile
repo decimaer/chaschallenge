@@ -5,9 +5,8 @@ WORKDIR /api
 COPY api .
 
 RUN npm install
-RUN npm install pm2
-RUN npx pm2 install typescript
+RUN npm install -g pm2
 
 EXPOSE 8888
 
-CMD ["npm", "run", "prod"]
+CMD ["pm2-runtime", "server.ts"]

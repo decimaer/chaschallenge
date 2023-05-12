@@ -6,8 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "eslint .",
-		"dev": "nodemon server.ts",
-		"prod": "pm2 start server.ts"
+		"dev": "nodemon server.ts"
 	},
 	"author": "",
 	"license": "ISC",
