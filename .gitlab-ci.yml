@@ -12,7 +12,7 @@ stages:
   - test
   - release
 
-api:
+api-dependencies:
   stage: build
   script:
    - cd api
@@ -22,19 +22,26 @@ api:
       - api/node_modules
     expire_in: 1 week
 
-api-validation:
-  stage: test
+api-linting:
+  stage: build
   before_script:
     - cd api
   script:
     - npm run lint
-  dependencies:
-    - api
+  needs: ["api-dependencies"]
   allow_failure:
     exit_codes:
       - 1
 
-api-newman-test:
+api-compile:
+  stage: build
+  before_script:
+    - cd api
+  script:
+    - npm run tsc
+  needs: ["api-linting"]
+
+api-test:
   stage: test
   before_script:
     - export DATABASE_URL="mongodb://$MONGO_HOST"
@@ -43,7 +50,7 @@ api-newman-test:
     - npm install -g newman
     - cd api
   script:
-    - npm run dev > server.log & sleep 10
+    - npm run start:prod > server.log & sleep 10
     - echo "Waiting for API server to start..."
     - >-
         newman run
@@ -54,28 +61,6 @@ api-newman-test:
   artifacts:
     paths:
       - api/server.log
-
-client:
-  stage: build
-  script:
-   - cd client
-   - npm install
-  artifacts:
-    paths:
-      - client/node_modules
-    expire_in: 1 week
-
-client-validation:
-  stage: test
-  before_script:
-    - cd client
-  script:
-    - npm run lint
-  dependencies:
-    - client
-  allow_failure:
-    exit_codes:
-      - 1
 
 build-image:
   stage: release 
