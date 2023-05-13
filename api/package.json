@@ -5,8 +5,13 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"lint": "eslint .",
-		"dev": "nodemon server.ts"
+		
+		"build:lint": "eslint .",
+		"build:tsc": "tsc",
+
+		"start:dev": "nodemon server.ts",
+		"start:prod": "node server.js",
+		"start:prod_pm2": "pm2 start server.js"
 	},
 	"author": "",
 	"license": "ISC",
@@ -21,6 +26,9 @@
 		"jsonwebtoken": "^9.0.0",
 		"mongoose": "^7.1.0",
 		"morgan": "^1.10.0",
+		"newman": "^5.3.2",
+		"pm2": "^5.3.0",
+		"typescript": "^5.0.4",
 		"validator": "^13.9.0",
 		"xss-clean": "^0.1.1"
 	},
