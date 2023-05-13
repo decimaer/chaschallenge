@@ -40,6 +40,9 @@ api-compile:
   script:
     - npm run build:tsc
   needs: ["api-dependencies", "api-linting"]
+  artifacts:
+    paths:
+      - api
 
 api-test:
   stage: test
@@ -49,7 +52,6 @@ api-test:
     - export JWT_EXPIRES_IN="30d"  
     - npm install -g newman
     - cd api
-    - ls
   script:
     - npm run start:prod > server.log & sleep 10
     - echo "Waiting for API server to start..."
@@ -57,7 +59,7 @@ api-test:
         newman run
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
-  needs: ["api-dependencies", "api-compile"]
+  needs: ["api-compile"]
   artifacts:
     paths:
       - api/server.log
