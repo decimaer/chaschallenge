@@ -39,7 +39,7 @@ api-compile:
     - cd api
   script:
     - npm run build:tsc
-  needs: ["api-linting"]
+  needs: ["api-dependencies", "api-linting"]
 
 api-test:
   stage: test
