@@ -56,7 +56,7 @@ api-test:
         newman run
         -e ../testing/Chas_Challenge.postman_environment.json
         ../testing/Chas_Challenge.postman_collection.json
-  needs: ["api-dependencies"]
+  needs: ["api-dependencies", "api-compile"]
   artifacts:
     paths:
       - api/server.log
