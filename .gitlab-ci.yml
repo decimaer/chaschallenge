@@ -27,7 +27,7 @@ api-linting:
   before_script:
     - cd api
   script:
-    - npm run lint
+    - npm run build:lint
   needs: ["api-dependencies"]
   allow_failure:
     exit_codes:
@@ -38,7 +38,7 @@ api-compile:
   before_script:
     - cd api
   script:
-    - npm run tsc
+    - npm run build:tsc
   needs: ["api-linting"]
 
 api-test:
