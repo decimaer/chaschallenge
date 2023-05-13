@@ -49,6 +49,7 @@ api-test:
     - export JWT_EXPIRES_IN="30d"  
     - npm install -g newman
     - cd api
+    - ls
   script:
     - npm run start:prod > server.log & sleep 10
     - echo "Waiting for API server to start..."
