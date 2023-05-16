@@ -15,7 +15,6 @@ router
 
 router
 	.route("/:id")
-	.get()
 	.delete(
 		authController.authUser,
 		authController.setPrivilege("self"),
@@ -23,5 +22,13 @@ router
 	);
 
 router.route("/top-three").get();
+
+router
+	.route("/task-stats/:id")
+	.get(
+		authController.authUser,
+		authController.setPrivilege("self"),
+		taskController.getStatsByUser
+	);
 
 export default router;
