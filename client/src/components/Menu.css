@@ -1,15 +1,15 @@
 #menu {
-    width: 20px;
+    width: 8%;
     position: fixed;
-    right: 15px;
-    top: 15px;
+    right: 10%;
+    top: 2%;
 }
 #menuDropdown {
     background-color: lime;
     width: 80px;
     position: fixed;
-    right: 0px;
-    top: 45px;
+    right: 5%;
+    top: 71px;
 }
 .menuItem {
     display: grid;

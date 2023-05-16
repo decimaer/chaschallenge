@@ -13,7 +13,7 @@ const Header = () => {
 
     return (
         <header>
-            <img src="" alt="" />
+            <img src="https://placehold.co/50" alt="" />
             <h2>GREEN HERO</h2>
             <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
         </header>
