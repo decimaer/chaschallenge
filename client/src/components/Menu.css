@@ -1,0 +1,26 @@
+#menu {
+    width: 20px;
+    position: fixed;
+    right: 15px;
+    top: 15px;
+}
+#menuDropdown {
+    background-color: lime;
+    width: 80px;
+    position: fixed;
+    right: 0px;
+    top: 45px;
+}
+.menuItem {
+    display: grid;
+    place-items: center;
+    padding: 5px;
+}
+.menuItem h4 {
+    margin: 0 auto;
+   
+}
+.menuItem img {
+    width: 60%;
+
+}
