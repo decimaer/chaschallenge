@@ -86,6 +86,7 @@ export const setPrivilege = (level: "self" | "admin"): middlewareType => {
 			if (
 				level === "self" &&
 				req.params.id !== req.decodedToken?.id &&
+				req.body.userId !== req.decodedToken?.id &&
 				req.user?.role !== "admin"
 			) {
 				throw error;

@@ -21,13 +21,8 @@
 				},
 				"url": {
 					"raw": "{{URL}}/api/users",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users"
-					]
+					"host": ["{{URL}}"],
+					"path": ["api", "users"]
 				}
 			},
 			"response": []
@@ -60,14 +55,8 @@
 				},
 				"url": {
 					"raw": "{{URL}}/api/users/login",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users",
-						"login"
-					]
+					"host": ["{{URL}}"],
+					"path": ["api", "users", "login"]
 				}
 			},
 			"response": []
@@ -89,14 +78,8 @@
 				"header": [],
 				"url": {
 					"raw": "{{URL}}/api/users/",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users",
-						""
-					]
+					"host": ["{{URL}}"],
+					"path": ["api", "users", ""]
 				}
 			},
 			"response": []
@@ -108,14 +91,8 @@
 				"header": [],
 				"url": {
 					"raw": "{{URL}}/api/users/64510eaa9d7fd49089777fbf",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users",
-						"64510eaa9d7fd49089777fbf"
-					]
+					"host": ["{{URL}}"],
+					"path": ["api", "users", "64510eaa9d7fd49089777fbf"]
 				}
 			},
 			"response": []
@@ -146,14 +123,8 @@
 				},
 				"url": {
 					"raw": "{{URL}}/api/users/64560f36d741b8722e503bcc",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users",
-						"64560f36d741b8722e503bcc"
-					]
+					"host": ["{{URL}}"],
+					"path": ["api", "users", "64560f36d741b8722e503bcc"]
 				}
 			},
 			"response": []
@@ -175,14 +146,8 @@
 				"header": [],
 				"url": {
 					"raw": "{{URL}}/api/users/64510994e304febeb5757821",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"users",
-						"64510994e304febeb5757821"
-					]
+					"host": ["{{URL}}"],
+					"path": ["api", "users", "64510994e304febeb5757821"]
 				}
 			},
 			"response": []

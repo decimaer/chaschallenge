@@ -7,6 +7,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 
 import userRouter from "./routes/userRoutes";
+import taskRouter from "./routes/taskRoutes";
 
 const app = express();
 
@@ -55,6 +56,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/api/users", userRouter);
+
+app.use("/api/tasks", taskRouter);
 
 app.all("*", (req, res, next) => {
 	res.status(404).json({

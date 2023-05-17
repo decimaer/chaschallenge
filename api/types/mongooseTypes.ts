@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export interface UserDocument extends Document {
 	// _id: ObjectId | string;
@@ -13,4 +13,10 @@ export interface UserDocument extends Document {
 		originalPassword: string
 	) => boolean;
 	// post: () => void;
+}
+
+export interface TaskDocument extends Document {
+	user: mongoose.Schema.Types.ObjectId;
+	type: "panta" | "recycle" | "garbage" | "secondhand";
+	points: number;
 }
