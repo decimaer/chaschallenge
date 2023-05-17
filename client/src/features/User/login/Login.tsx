@@ -35,7 +35,7 @@ function Login() {
         console.log(setUserState);
         
         setUserState({ ...userState, jwt: JSON.parse(result).token });
-      }).then(asd => {
+      }).then(() => {
         console.log(userState)
       })
       .catch(error => console.log('error', error));
