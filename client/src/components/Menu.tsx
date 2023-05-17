@@ -1,11 +1,12 @@
 import React from 'react';
 import "./Menu.css"
+import { Link } from 'react-router-dom';
 
 const menuLinks = [
     {
         icon: "./home.png", //Path to icon, ex "./home.png"
         text: "Start", //Where it goes, ex "Contact us"
-        path: "../features/User/login/Login.tsx", //The path to the site
+        path: "", //The path to the site
     }
 ]
 
@@ -32,10 +33,10 @@ const Menu = ({ isOpen, setIsOpen }) => {
                             {
                                 menuLinks.map((item) => {
                                     return (
-                                        <a href={item.path} className='menuItem'>
+                                        <Link to={item.path} className='menuItem'>
                                             <img src={item.icon} alt="" />
                                             <h4>{item.text}</h4>
-                                        </a>
+                                        </Link>
                                     )
                                 })
                             }

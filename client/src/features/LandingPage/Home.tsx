@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -18,13 +19,13 @@ const Home = () => {
                     <p>
                         Vill du också var med
                     </p>
-                    <Button text="Skapa ett konto" style="homeBtn" />
+                    <Link to={"register"}><Button text="Skapa ett konto" style="homeBtn" /></Link>
                 </section>
                 <section>
                     <p>
                         Redan en i gänget?
                     </p>
-                    <Button text="Logga in" style="homeBtn" />
+                    <Link to={"login"}><Button text="Logga in" style="homeBtn" /></Link>
                 </section>
             </main>
 
