@@ -2,33 +2,12 @@ import { Task } from "../models/taskModel";
 import { middlewareType } from "../types/expressTypes";
 import mongoose from "mongoose";
 
-export const createTask: middlewareType = async (req, res) => {
+export const statsByUser = async (id: string) => {
 	try {
-		const newTask = await Task.create({
-			user: req.body.userId,
-			type: req.body.type,
-		});
-
-		console.log(newTask);
-
-		res.status(201).json({
-			status: "success",
-			data: newTask,
-		});
-	} catch (error) {
-		res.status(400).json({
-			status: "fail",
-			message: error,
-		});
-	}
-};
-
-export const getStatsByUser: middlewareType = async (req, res) => {
-	try {
-		const stats = await Task.aggregate([
+		return Task.aggregate([
 			{
 				$match: {
-					user: new mongoose.Types.ObjectId(req.params.id),
+					user: new mongoose.Types.ObjectId(id),
 				},
 			},
 			{
@@ -75,6 +54,33 @@ export const getStatsByUser: middlewareType = async (req, res) => {
 				},
 			},
 		]);
+	} catch (error) {}
+};
+
+export const createTask: middlewareType = async (req, res) => {
+	try {
+		const newTask = await Task.create({
+			user: req.body.userId,
+			type: req.body.type,
+		});
+
+		console.log(newTask);
+
+		res.status(201).json({
+			status: "success",
+			data: newTask,
+		});
+	} catch (error) {
+		res.status(400).json({
+			status: "fail",
+			message: error,
+		});
+	}
+};
+
+export const getStatsByUser: middlewareType = async (req, res) => {
+	try {
+		const stats = await statsByUser(req.params.id);
 
 		res.status(200).json({
 			status: "success",
