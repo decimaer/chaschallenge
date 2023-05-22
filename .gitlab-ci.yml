@@ -21,7 +21,9 @@ api-dependencies:
     paths:
       - api/node_modules
     expire_in: 1 week
-
+  only:
+    - main
+    
 api-linting:
   stage: build
   before_script:
@@ -32,6 +34,8 @@ api-linting:
   allow_failure:
     exit_codes:
       - 1
+  only:
+    - main
 
 api-compile:
   stage: build
@@ -43,6 +47,8 @@ api-compile:
   artifacts:
     paths:
       - api
+  only:
+    - main
 
 api-test:
   stage: test
@@ -63,6 +69,8 @@ api-test:
   artifacts:
     paths:
       - api/server.log
+  only:
+    - main
 
 build-image:
   stage: release 
@@ -88,3 +96,5 @@ build-image:
     - docker tag $CI_REGISTRY_IMAGE:$VERSION $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:$VERSION
+  only:
+    - main
