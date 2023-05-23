@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
-import { useForm, Resolver } from 'react-hook-form'
+import { useForm, Resolver, FieldValues, SubmitHandler } from 'react-hook-form'
 
 import { Schema, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,9 +16,9 @@ const LoginSchema = z.object({
 
 
 function Login() {
-  const {userState, setUserState}: any = useContext(UserContext);
+  const { userState, setUserState }: any = useContext(UserContext);
 
-  const loginUser = (data: { email: string, password: string }) => {
+  const loginUser = (data: FieldValues) => {
     console.log(import.meta.env.API_URL)
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -33,7 +33,7 @@ function Login() {
       .then((result): any => {
         console.log(userState);
         console.log(setUserState);
-        
+
         setUserState({ ...userState, jwt: JSON.parse(result).token });
       }).then(() => {
         console.log(userState)
@@ -45,8 +45,7 @@ function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FieldValues>  = (data) => {
     loginUser(data)
 
     console.log(usernameOrEmail, password);

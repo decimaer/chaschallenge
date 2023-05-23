@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
-import { useForm, Resolver } from 'react-hook-form'
+import { useForm, FieldValues, SubmitHandler } from 'react-hook-form'
 
 import { Schema, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +23,8 @@ const FormSchema = z.object({
 
 
 function Register() {
-  const onSubmit = (data) => {
+
+  const onSubmit: SubmitHandler<FieldValues>  = (data) => {
     // event.preventDefault();
 
 
@@ -32,7 +33,7 @@ function Register() {
 
   };
 
-  const createAccount = (data) => {
+  const createAccount = (data: FieldValues) => {
     console.log(import.meta.env.API_URL)
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
