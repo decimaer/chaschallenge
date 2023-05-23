@@ -1,6 +1,65 @@
 import { Task } from "../models/taskModel";
 import { middlewareType } from "../types/expressTypes";
+import { StatsAggregate } from "../types/mongooseTypes";
 import mongoose from "mongoose";
+
+export const statsByUser = async (id: string) => {
+	const stats: StatsAggregate = await Task.aggregate([
+		{
+			$match: {
+				user: new mongoose.Types.ObjectId(id),
+			},
+		},
+		{
+			$group: {
+				_id: "$type",
+				count: { $sum: 1 },
+				totalPoints: { $sum: "$points" },
+			},
+		},
+		{
+			$group: {
+				_id: null,
+				numPanta: {
+					$sum: {
+						$cond: [{ $eq: ["$_id", "panta"] }, "$count", 0],
+					},
+				},
+				numRecycle: {
+					$sum: {
+						$cond: [{ $eq: ["$_id", "recycle"] }, "$count", 0],
+					},
+				},
+				numGarbage: {
+					$sum: {
+						$cond: [{ $eq: ["$_id", "garbage"] }, "$count", 0],
+					},
+				},
+				numSecondhand: {
+					$sum: {
+						$cond: [{ $eq: ["$_id", "secondhand"] }, "$count", 0],
+					},
+				},
+				totalPoints: { $sum: "$totalPoints" },
+			},
+		},
+		{
+			$project: {
+				_id: 0,
+				numPanta: 1,
+				numRecycle: 1,
+				numGarbage: 1,
+				numSecondhand: 1,
+				totalPoints: "$totalPoints",
+			},
+		},
+	]);
+
+	// a new level is reached every 1000 points
+	stats[0].level = Math.floor(stats[0].totalPoints / 1000) + 1;
+
+	return stats;
+};
 
 export const createTask: middlewareType = async (req, res) => {
 	try {
@@ -25,56 +84,7 @@ export const createTask: middlewareType = async (req, res) => {
 
 export const getStatsByUser: middlewareType = async (req, res) => {
 	try {
-		const stats = await Task.aggregate([
-			{
-				$match: {
-					user: new mongoose.Types.ObjectId(req.params.id),
-				},
-			},
-			{
-				$group: {
-					_id: "$type",
-					count: { $sum: 1 },
-					totalPoints: { $sum: "$points" },
-				},
-			},
-			{
-				$group: {
-					_id: null,
-					numPanta: {
-						$sum: {
-							$cond: [{ $eq: ["$_id", "panta"] }, "$count", 0],
-						},
-					},
-					numRecycle: {
-						$sum: {
-							$cond: [{ $eq: ["$_id", "recycle"] }, "$count", 0],
-						},
-					},
-					numGarbage: {
-						$sum: {
-							$cond: [{ $eq: ["$_id", "garbage"] }, "$count", 0],
-						},
-					},
-					numSecondhand: {
-						$sum: {
-							$cond: [{ $eq: ["$_id", "secondhand"] }, "$count", 0],
-						},
-					},
-					totalPoints: { $sum: "$totalPoints" },
-				},
-			},
-			{
-				$project: {
-					_id: 0,
-					numPanta: 1,
-					numRecycle: 1,
-					numGarbage: 1,
-					numSecondhand: 1,
-					totalPoints: "$totalPoints",
-				},
-			},
-		]);
+		const stats = await statsByUser(req.params.id);
 
 		res.status(200).json({
 			status: "success",

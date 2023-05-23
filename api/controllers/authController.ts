@@ -2,13 +2,30 @@ import { middlewareType } from "../types/expressTypes";
 import User from "../models/userModel";
 import jwt from "jsonwebtoken";
 
+import * as taskController from "./taskController";
+
 const signToken = (id: string) => {
 	return jwt.sign({ id }, `${process.env.JWT_SECRET_KEY}`, {
 		expiresIn: process.env.JWT_EXPIRES_IN,
 	});
 };
 
-export const logInUser: middlewareType = async (req, res, next) => {
+// Returns for both a logged in user and for logging in a new registered user
+export const loggedInUserResponse = async (id: string) => {
+	const user = await User.findById(id);
+
+	const stats = (await taskController.statsByUser(id))?.at(0);
+
+	const token = signToken(id.toString());
+
+	return {
+		status: "success",
+		token,
+		data: { user, stats },
+	};
+};
+
+export const logInUser: middlewareType = async (req, res) => {
 	try {
 		if (!req.body.email || !req.body.password)
 			throw new Error("Wrong email or password!");
@@ -24,14 +41,7 @@ export const logInUser: middlewareType = async (req, res, next) => {
 			throw new Error("Wrong email or password!");
 		}
 
-		console.log(typeof user._id.toString());
-
-		const token = signToken(user._id.toString());
-
-		res.status(201).json({
-			status: "success",
-			token,
-		});
+		res.status(201).json(await loggedInUserResponse(user._id.toString()));
 	} catch (error: any) {
 		console.log(error);
 		res.status(401).json({

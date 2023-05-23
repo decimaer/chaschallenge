@@ -20,3 +20,5 @@ export interface TaskDocument extends Document {
 	type: "panta" | "recycle" | "garbage" | "secondhand";
 	points: number;
 }
+
+export type StatsAggregate = Array<{ level: number; totalPoints: number }>;
