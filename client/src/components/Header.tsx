@@ -5,7 +5,6 @@ import "./Header.css"
 
 const Header = () => {
 
-    const [isOpen, setIsOpen] = React.useState(false);
 
 
     //
@@ -15,7 +14,7 @@ const Header = () => {
         <header>
             <img src="https://placehold.co/50" alt="" />
             <h2>GREEN HERO</h2>
-            <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
+            <Menu />
         </header>
     );
 };

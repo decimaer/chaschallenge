@@ -5,7 +5,7 @@
     top: 2%;
 }
 #menuDropdown {
-    background-color: lime;
+    background-color: #cccccc;
     width: 80px;
     position: fixed;
     right: 5%;
@@ -15,6 +15,7 @@
     display: grid;
     place-items: center;
     padding: 5px;
+    border-bottom: #000000 solid 1px;
 }
 .menuItem h4 {
     margin: 0 auto;

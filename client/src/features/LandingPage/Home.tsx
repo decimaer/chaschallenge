@@ -19,13 +19,13 @@ const Home = () => {
                     <p>
                         Vill du också var med
                     </p>
-                    <Link to={"register"}><Button text="Skapa ett konto" style="homeBtn" /></Link>
+                    <Link to={"register"}><Button text="Skapa ett konto"/></Link>
                 </section>
                 <section>
                     <p>
                         Redan en i gänget?
                     </p>
-                    <Link to={"login"}><Button text="Logga in" style="homeBtn" /></Link>
+                    <Link to={"login"}><Button text="Logga in"/></Link>
                 </section>
             </main>
 

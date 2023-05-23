@@ -6,14 +6,39 @@ const menuLinks = [
     {
         icon: "./home.png", //Path to icon, ex "./home.png"
         text: "Start", //Where it goes, ex "Contact us"
-        path: "", //The path to the site
-    }
+        path: "/", //The path to the site
+    },
+    {
+        icon: "./.png", //Path to icon, ex "./home.png"
+        text: "Regler", //Where it goes, ex "Contact us"
+        path: "/rules", //The path to the site
+    },
+    {
+        icon: "./.png", //Path to icon, ex "./home.png"
+        text: "Konto", //Where it goes, ex "Contact us"
+        path: "/profile", //The path to the site
+    },
+    {
+        icon: "./.png", //Path to icon, ex "./home.png"
+        text: "Tips", //Where it goes, ex "Contact us"
+        path: "/tips", //The path to the site
+    },
+    {
+        icon: "./.png", //Path to icon, ex "./home.png"
+        text: "Om oss", //Where it goes, ex "Contact us"
+        path: "/about", //The path to the site
+    },
+    {
+        icon: "./.png", //Path to icon, ex "./home.png"
+        text: "Kontakt", //Where it goes, ex "Contact us"
+        path: "/contact", //The path to the site
+    },
+    
 ]
 
-const Menu = ({ isOpen, setIsOpen }) => {
+const Menu = () => {
     //Importera om man är inloggad eller inte
-
-    
+    const [isOpen, setIsOpen] = React.useState(false);
 
 
     return (
@@ -31,9 +56,9 @@ const Menu = ({ isOpen, setIsOpen }) => {
                     isOpen ? (
                         <div>
                             {
-                                menuLinks.map((item) => {
+                                menuLinks.map((item, index) => {
                                     return (
-                                        <Link to={item.path} className='menuItem'>
+                                        <Link to={item.path} className='menuItem' key={index}>
                                             <img src={item.icon} alt="" />
                                             <h4>{item.text}</h4>
                                         </Link>
