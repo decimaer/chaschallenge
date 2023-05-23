@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 // import xss from "xss-clean";
 import hpp from "hpp";
+import cors from "cors"
 
 import userRouter from "./routes/userRoutes";
 import taskRouter from "./routes/taskRoutes";
@@ -14,6 +15,9 @@ const app = express();
 //Express middlewares etc
 // set security http headers
 app.use(helmet());
+
+//Use cors for client side requests
+app.use(cors())
 
 // Dev logging
 console.log(process.env.NODE_ENV);

@@ -43,6 +43,12 @@ const userSchema = new mongoose.Schema<UserDocument>(
 				true,
 				"Please agree to the terms and conditions to use this service!",
 			],
+			validate: {
+				validator: function(v: boolean): boolean {
+					return v === true;
+				},
+				message: "You must agree to the terms and conditions!"
+			},
 		},
 		role: {
 			type: String,
