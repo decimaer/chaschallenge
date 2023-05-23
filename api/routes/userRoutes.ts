@@ -11,12 +11,28 @@ router.route("/login").post(authController.logInUser);
 
 router
 	.route("/")
-	.get(authController.authUser, userController.getAllUsers)
+	.get(
+		authController.authUser,
+		authController.setPrivilege("admin"),
+		userController.getAllUsers
+	)
 	.post(userController.createUser);
 router
 	.route("/:id")
-	.get(userController.getUser)
-	.patch(authController.authUser, userController.updateUser)
-	.delete(authController.authUser, userController.deleteUser);
+	.get(
+		authController.authUser,
+		authController.setPrivilege("self"),
+		userController.getUser
+	)
+	.patch(
+		authController.authUser,
+		authController.setPrivilege("self"),
+		userController.updateUser
+	)
+	.delete(
+		authController.authUser,
+		authController.setPrivilege("admin"),
+		userController.deleteUser
+	);
 
 export default router;

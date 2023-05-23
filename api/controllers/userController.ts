@@ -1,20 +1,27 @@
 // Importing necessary dependencies
-import { User } from "../models/userModel";
+import User from "../models/userModel";
 import { middlewareType } from "../types/expressTypes";
 
+import * as authController from "./authController";
+
 // Create a new user
-export const createUser: middlewareType = async (req, res, next) => {
+export const createUser: middlewareType = async (req, res) => {
 	try {
 		// Use the User model to create a new user from the request body
-		const newUser = await User.create(req.body);
+		const newUser = await User.create({
+			name: req.body.name,
+			email: req.body.email,
+			password: req.body.password,
+			passwordConfirm: req.body.passwordConfirm,
+			agreeTerms: true,
+		});
 
 		console.log(newUser); // Log the new user to the console for debugging purposes
 
 		// Respond with a 201 status and the new user's data
-		res.status(201).json({
-			status: "success",
-			data: newUser,
-		});
+		res.status(201).json(
+			await authController.loggedInUserResponse(newUser._id.toString())
+		);
 	} catch (error) {
 		res.status(400).json({
 			status: "fail",
@@ -24,7 +31,7 @@ export const createUser: middlewareType = async (req, res, next) => {
 };
 
 // Get all users
-export const getAllUsers: middlewareType = async (req, res, next) => {
+export const getAllUsers: middlewareType = async (req, res) => {
 	try {
 		// Use the User model to find all users in the database
 		const users = await User.find({});
@@ -46,7 +53,7 @@ export const getAllUsers: middlewareType = async (req, res, next) => {
 };
 
 // Get a specific user by ID
-export const getUser: middlewareType = async (req, res, next) => {
+export const getUser: middlewareType = async (req, res) => {
 	try {
 		// Use the User model to find a user by their ID
 		const user = await User.findById(req.params.id);
@@ -67,7 +74,7 @@ export const getUser: middlewareType = async (req, res, next) => {
 };
 
 // Update a specific user by ID
-export const updateUser: middlewareType = async (req, res, next) => {
+export const updateUser: middlewareType = async (req, res) => {
 	try {
 		// Use the User model to find and update a user by their ID
 		const updatedUser = await User.findByIdAndUpdate(
@@ -100,7 +107,7 @@ export const updateUser: middlewareType = async (req, res, next) => {
 };
 
 // Delete a specific user by ID
-export const deleteUser: middlewareType = async (req, res, next) => {
+export const deleteUser: middlewareType = async (req, res) => {
 	try {
 		// Use the User model to find and delete a user by their ID
 		await User.findByIdAndDelete(req.params.id);
