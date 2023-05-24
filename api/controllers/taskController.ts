@@ -55,6 +55,9 @@ export const statsByUser = async (id: string) => {
 		},
 	]);
 
+	// return now if no tasks were found
+	if (stats.length === 0) return stats;
+
 	// a new level is reached every 1000 points
 	stats[0].level = Math.floor(stats[0].totalPoints / 1000) + 1;
 
