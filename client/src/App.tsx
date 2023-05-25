@@ -25,8 +25,8 @@ function App() {
          <div className="App">
             <Header />
             <main
-               className="flex flex-col justify-center items-center 
-         bg-purplePrimary px-[25px]"
+               className="flex flex-col  items-center 
+         bg-purplePrimary px-[25px] pt-8"
             >
                <Routes>
                   <Route path="/" element={<Home />} />
