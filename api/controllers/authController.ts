@@ -14,7 +14,7 @@ const signToken = (id: string) => {
 export const loggedInUserResponse = async (id: string) => {
 	const user = await User.findById(id);
 
-	const stats = (await taskController.statsByUser(id))?.at(0);
+	const stats = (await taskController.statsByUser(id))?.at(0) || {};
 
 	const token = signToken(id.toString());
 
