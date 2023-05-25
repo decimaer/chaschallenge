@@ -10,7 +10,7 @@ const Home = () => {
             <Header />
 
             <main>
-                <h1>GREEN HERO</h1>
+                <h1 className='text-3xl font-josefin font-bold'>GREEN HERO</h1>
                 <p>
                     En inbjudande kul text som får folk att vilja gå med
                 </p>
