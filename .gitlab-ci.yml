@@ -22,6 +22,16 @@ api-dependencies:
          - api/node_modules
       expire_in: 1 week
 
+frontend-dependencies:
+   stage: build
+   script:
+      - cd client
+      - npm install
+   artifacts:
+      paths:
+         - client/node_modules
+      expire_in: 1 week
+
 api-linting:
    stage: build
    before_script:
@@ -29,6 +39,17 @@ api-linting:
    script:
       - npm run build:lint
    needs: ['api-dependencies']
+   allow_failure:
+      exit_codes:
+         - 1
+
+frontend-linting:
+   stage: build
+   before_script:
+      - cd client
+   script:
+      - npm run lint
+   needs: ['frontend-dependencies']
    allow_failure:
       exit_codes:
          - 1
@@ -43,6 +64,17 @@ api-compile:
    artifacts:
       paths:
          - api
+
+frontend-compile:
+   stage: build
+   before_script:
+      - cd client
+   script:
+      - npm run build
+   needs: ['frontend-dependencies', 'frontend-linting']
+   artifacts:
+      paths:
+         - client/dist
 
 api-test:
    stage: test
