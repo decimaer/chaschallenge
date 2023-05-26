@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import { Schema, z } from 'zod';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const FormSchema = z.object({
@@ -24,28 +25,37 @@ const FormSchema = z.object({
    }),
 });
 
-function Register() {
-   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-      // event.preventDefault();
-
-      createAccount(data);
-      console.log(data);
-   };
-
-   const createAccount = (data: FieldValues) => {
+const createAccount = async (data: FieldValues) => {
+   try {
       console.log(import.meta.env.API_URL);
       const myHeaders = new Headers();
       myHeaders.append('Content-Type', 'application/json');
 
-      fetch(`http://127.0.0.1:8888/api/users`, {
+      const response = await fetch(`http://127.0.0.1:8888/api/users`, {
          method: 'POST',
          headers: myHeaders,
          body: JSON.stringify(data),
          redirect: 'follow',
-      })
-         .then((response) => response.text())
-         .then((result) => console.log(result))
-         .catch((error) => console.log('error', error));
+      });
+
+      if (!response.ok) throw new Error('Failed to register user.');
+
+      const resData = await response.json();
+
+      if (resData.status === 'fail') throw new Error(resData.message);
+
+      // save data to state
+   } catch (error: any) {
+      console.error(error.message);
+   }
+};
+
+function Register() {
+   const navigate = useNavigate();
+   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+      await createAccount(data);
+
+      navigate('/');
    };
 
    const {
