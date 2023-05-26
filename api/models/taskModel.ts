@@ -17,6 +17,9 @@ const taskSchema = new mongoose.Schema<TaskDocument>(
       points: {
          type: Number,
       },
+      timeout: {
+         type: String
+      }
    },
    {
       timestamps: true,

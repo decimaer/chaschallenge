@@ -19,6 +19,7 @@ export interface TaskDocument extends Document {
    user: mongoose.Schema.Types.ObjectId;
    type: 'panta' | 'recycle' | 'garbage' | 'secondhand';
    points: number;
+   timeout: string;
 }
 
 export type StatsAggregate = Array<{ level: number; totalPoints: number }>;

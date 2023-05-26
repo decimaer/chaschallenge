@@ -66,9 +66,23 @@ export const statsByUser = async (id: string) => {
 
 export const createTask: middlewareType = async (req, res) => {
    try {
+      //Get todays date
+      const timestamp = new Date()
+
+      //Add one day
+      timestamp.setDate(timestamp.getDate() + 1);
+
+      //Convert to milliseconds
+      const msTimestamp = Math.floor((new Date(timestamp).getTime()) / 1000)
+
+      console.log("Normal date: " + timestamp);
+      console.log("Seconds to that date: " + msTimestamp);
+      
+
       const newTask = await Task.create({
          user: req.body.userId,
          type: req.body.type,
+         timeout: msTimestamp
       });
 
       console.log(newTask);
