@@ -17,16 +17,13 @@ const taskSchema = new mongoose.Schema<TaskDocument>(
       points: {
          type: Number,
       },
-      timeout: {
-         type: String
-      }
    },
    {
       timestamps: true,
    }
 );
 
-taskSchema.pre('save', function () {
+taskSchema.pre('save', function (next) {
    // should be moved to seperate settings file?
    const points = {
       panta: 50,
@@ -36,6 +33,9 @@ taskSchema.pre('save', function () {
    };
 
    this.points = points[this.type];
+
+   next()
+
 });
 
 export const Task = mongoose.model('Task', taskSchema);

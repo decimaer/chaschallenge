@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
    passwordConfirm: string | undefined;
    agreeTerms: boolean;
    role: string;
+   timeouts: Object;
    comparePasswords: (
       currentPassword: string,
       originalPassword: string
@@ -19,7 +20,6 @@ export interface TaskDocument extends Document {
    user: mongoose.Schema.Types.ObjectId;
    type: 'panta' | 'recycle' | 'garbage' | 'secondhand';
    points: number;
-   timeout: string;
 }
 
 export type StatsAggregate = Array<{ level: number; totalPoints: number }>;
