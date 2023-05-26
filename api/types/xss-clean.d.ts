@@ -4,13 +4,13 @@
 	export default value;
 } */
 
-declare module "xss-clean" {
-	function xssClean(): (
-		req: import("express").Request,
-		res: import("express").Response,
-		next: import("express").NextFunction
-	) => void;
+declare module 'xss-clean' {
+   function xssClean(): (
+      req: import('express').Request,
+      res: import('express').Response,
+      next: import('express').NextFunction
+   ) => void;
 
-	namespace xssClean {}
-	export = xssClean;
+   namespace xssClean {}
+   export = xssClean;
 }
