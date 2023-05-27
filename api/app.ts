@@ -10,6 +10,8 @@ import cors from 'cors';
 import userRouter from './routes/userRoutes';
 import taskRouter from './routes/taskRoutes';
 
+import * as path from 'path'
+
 const app = express();
 
 //Express middlewares etc
@@ -52,6 +54,11 @@ app.use(
 
 // serving static files
 app.use(express.static(__dirname + process.env.DIR_STATIC_FILES));
+
+//
+app.get('/', (req, res) => {
+   res.sendFile(path.join(__dirname + process.env.DIR_STATIC_FILES, 'index.html'));
+});
 
 // Basic structure of middleware function in express
 app.use((req, res, next) => {
