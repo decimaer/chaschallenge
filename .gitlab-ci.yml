@@ -19,7 +19,7 @@ api-dependencies:
       - npm install
    artifacts:
       paths:
-         - api/node_modules
+         - api
       expire_in: 1 week
 
 frontend-dependencies:
@@ -29,7 +29,7 @@ frontend-dependencies:
       - npm install
    artifacts:
       paths:
-         - client/node_modules
+         - client
       expire_in: 1 week
 
 api-linting:
@@ -74,7 +74,7 @@ frontend-compile:
    needs: ['frontend-dependencies', 'frontend-linting']
    artifacts:
       paths:
-         - api
+         - client/dist
 
 api-test:
    stage: test
