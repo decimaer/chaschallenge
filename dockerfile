@@ -1,10 +1,10 @@
 # App
 FROM node:19-alpine3.16
 
-WORKDIR /api
+WORKDIR /app
 
-COPY api .
-#COPY client .
+COPY api /app/api
+COPY client /app/client
 
 RUN npm install
 
