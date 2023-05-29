@@ -70,12 +70,20 @@ const Tasks = () => {
             <h3 className='mt-[46px] text-2xl'>Vad har du gjort idag?</h3>
                 <div className="grid grid-cols-2 grid-rows-2 gap-2 mt-8">
                     {hoverTasks.map((task, index) => (
-                        <img key={index} src={task.src} className="" alt="" />
+                        <img 
+                        key={index} 
+                        src={task.src} 
+                        alt="" />
                     ))}
                                         
                     <div className="grid grid-cols-2 grid-rows-2 gap-2 absolute">
                         {defaultTasks.map((task, index) => (
-                            <img key={index} src={task.src} className="hover:opacity-0" alt="" />
+                            <img 
+                            key={index} 
+                            src={task.src} 
+                            className="hover:opacity-0" 
+                            alt=""
+                            onClick={() => console.log("clickidick")} />
                         ))}
                     </div>                    
                 </div>
