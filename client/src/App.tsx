@@ -10,6 +10,7 @@ import Contact from './features/Misc/contact/Contact';
 import Profile from './features/User/profile/Profile';
 import Rules from './features/Misc/rules/Rules';
 import About from './features/Misc/about/About';
+import Tasks from './features/LandingPage/Tasks';
 import { UserContext } from './state/context';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -23,6 +24,8 @@ function App() {
             <Header />
             <Routes>
                <Route path="/" element={<Home />} />
+               {/* Temporary path while building */}
+               <Route path="/tasks" element={<Tasks />} />
                <Route path="/register" element={<Register />} />
                <Route path="/login" element={<Login />} />
                <Route path="/contact" element={<Contact />} />

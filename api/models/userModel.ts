@@ -55,6 +55,24 @@ const userSchema = new mongoose.Schema<UserDocument>(
          enum: ['admin', 'user'],
          default: 'user',
       },
+      timeouts: {
+         panta: {
+            type: Date,
+            default: ''
+          },
+          recycle: {
+            type: Date,
+            default: ''
+          },
+          garbage: {
+            type: Date,
+            default: ''
+          },
+          secondhand: {
+            type: Date,
+            default: ''
+          }
+      }
    },
    {
       timestamps: true,
@@ -74,6 +92,15 @@ userSchema.pre('save', async function (next) {
    this.passwordConfirm = undefined;
    next();
 });
+
+/* userSchema.post(/^find/, function (asd,  next) {
+
+   console.log(new Date(asd.timeout).getTime())
+   asd.timeout = new Date(asd.timeout).getTime()
+
+
+   next()
+}); */
 
 // Funkar ej pga typ  :((((((
 /* userSchema.post("find", function (next) {

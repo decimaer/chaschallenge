@@ -1,4 +1,5 @@
 import { Task } from '../models/taskModel';
+import User from '../models/userModel';
 import { middlewareType } from '../types/expressTypes';
 import { StatsAggregate } from '../types/mongooseTypes';
 import mongoose from 'mongoose';
@@ -66,12 +67,32 @@ export const statsByUser = async (id: string) => {
 
 export const createTask: middlewareType = async (req, res) => {
    try {
+      const [userId, type] = [req.body.userId, req.body.type]
+
       const newTask = await Task.create({
-         user: req.body.userId,
-         type: req.body.type,
+         user: userId,
+         type: type,
       });
 
-      console.log(newTask);
+      console.log('New task' + newTask);
+
+      //Get todays date
+      const timestamp = new Date();
+
+      //Add one day
+      timestamp.setDate(timestamp.getDate() + 1);
+
+      //Find the user to edit their timeouts
+      const user = await User.findByIdAndUpdate(req.body.userId, {
+         timeouts: {
+            [type]: timestamp
+         }
+      }, {
+         // Options for the update
+         runValidators: true, // Run validation on the updated fields
+         new: true, // Return the updated user object
+      });
+      console.log('User: ' + user);
 
       res.status(201).json({
          status: 'success',
