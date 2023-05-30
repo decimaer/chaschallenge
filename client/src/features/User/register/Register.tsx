@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
 import ErrorMessage from '../../../components/ErrorMessage';
+import { FormValues } from '../../../types/Register';
 
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -62,8 +63,8 @@ const createAccount = async (data: FieldValues) => {
 function Register() {
    const navigate = useNavigate();
    const { userState, setUserState }: any = useContext(UserContext);
-   const [isError, setIsError] = useState(false);
-   const [errorMessage, setErrorMessage] = useState(null);
+   const [isError, setIsError] = useState<boolean>(false);
+   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
    const onSubmit: SubmitHandler<FieldValues> = async (fieldData) => {
       try {
@@ -89,67 +90,78 @@ function Register() {
    const {
       register,
       handleSubmit,
-      watch,
       formState: { errors },
-   } = useForm({
+   } = useForm<FormValues>({
       resolver: zodResolver(FormSchema),
    });
-   console.log(errors);
 
    return (
-      <div>
+      <>
          <Header />
-         {isError && <ErrorMessage message={errorMessage} />}
-         <form onSubmit={handleSubmit(onSubmit)}>
+         <h2>Registrera dig:</h2>
+         <form onSubmit={handleSubmit(onSubmit)} className="flex-column">
+            {isError && <ErrorMessage message={errorMessage} />}
+            {errors.name && <ErrorMessage message={errors.name.message} />}
             <label>
                <input
                   type="text"
-                  placeholder="Enter your Username"
+                  placeholder="Skapa ett användarnamn"
                   {...register('name')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
             <label>
+               {errors.email && <ErrorMessage message={errors.email.message} />}
                <input
                   type="email"
-                  placeholder="Enter your Email"
+                  placeholder="Skriv din mejl"
                   {...register('email')}
                />
-               {/* <p>{errors.email && errors.email.message}</p> */}
-            </label>{' '}
-            <br />
+            </label>
+            {errors.password && (
+               <ErrorMessage message={errors.password.message} />
+            )}
             <label>
                <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="Skapa lösenord"
                   {...register('password')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
+            {errors.passwordConfirm && (
+               <ErrorMessage message={errors.passwordConfirm.message} />
+            )}
             <label>
                <input
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder="Bekräfta lösenord"
                   {...register('passwordConfirm')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
+            {errors.location && (
+               <ErrorMessage message={errors.location.message} />
+            )}
             <label>
                <input
                   type="text"
-                  placeholder="Location"
+                  placeholder="Välj län"
                   {...register('location')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
+            {errors.agreeTerms && (
+               <ErrorMessage message={errors.agreeTerms.message} />
+            )}
             <label>
                <input type="checkbox" {...register('agreeTerms')} />
-            </label>{' '}
-            <br />
+            </label>
+
             <button type="submit">Register</button>
          </form>
          <Footer />
-      </div>
+      </>
    );
 }
 

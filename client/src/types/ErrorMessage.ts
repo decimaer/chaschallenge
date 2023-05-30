@@ -1,3 +1,3 @@
 export type Props = {
-   message: string | null;
+   message: string | null | undefined;
 };
