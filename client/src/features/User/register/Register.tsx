@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
+import ErrorMessage from '../../../components/ErrorMessage';
+
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
+import { useContext } from 'react';
+import { UserContext } from '../../../state/context';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -27,16 +32,19 @@ const FormSchema = z.object({
 
 const createAccount = async (data: FieldValues) => {
    try {
-      console.log(import.meta.env.API_URL);
+      console.log(import.meta.env.VITE_API_URL);
       const myHeaders = new Headers();
       myHeaders.append('Content-Type', 'application/json');
 
-      const response = await fetch(`http://127.0.0.1:8888/api/users`, {
-         method: 'POST',
-         headers: myHeaders,
-         body: JSON.stringify(data),
-         redirect: 'follow',
-      });
+      const response = await fetch(
+         `${import.meta.env.VITE_API_URL}/api/users`,
+         {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify(data),
+            redirect: 'follow',
+         }
+      );
 
       if (!response.ok) throw new Error('Failed to register user.');
 
@@ -44,18 +52,38 @@ const createAccount = async (data: FieldValues) => {
 
       if (resData.status === 'fail') throw new Error(resData.message);
 
-      // save data to state
+      return resData;
    } catch (error: any) {
       console.error(error.message);
+      throw new Error(error.message);
    }
 };
 
 function Register() {
    const navigate = useNavigate();
-   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-      await createAccount(data);
+   const { userState, setUserState }: any = useContext(UserContext);
+   const [isError, setIsError] = useState(false);
+   const [errorMessage, setErrorMessage] = useState(null);
 
-      navigate('/');
+   const onSubmit: SubmitHandler<FieldValues> = async (fieldData) => {
+      try {
+         const data = await createAccount(fieldData);
+         console.log(data);
+
+         // save data to state
+         const userData = {
+            token: data.token,
+            user: data.user,
+            stats: data.stats,
+         };
+         setUserState(userData);
+
+         // navigate back to landing page
+         navigate('/');
+      } catch (error: any) {
+         setErrorMessage(error.message);
+         setIsError(true);
+      }
    };
 
    const {
@@ -71,6 +99,7 @@ function Register() {
    return (
       <div>
          <Header />
+         {isError && <ErrorMessage message={errorMessage} />}
          <form onSubmit={handleSubmit(onSubmit)}>
             <label>
                <input
