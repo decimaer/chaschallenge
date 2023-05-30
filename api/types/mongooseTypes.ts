@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
    passwordConfirm: string | undefined;
    agreeTerms: boolean;
    role: string;
+   timeouts: Object;
    comparePasswords: (
       currentPassword: string,
       originalPassword: string
