@@ -81,7 +81,7 @@ const Tasks = () => {
                             <img 
                             key={index} 
                             src={task.src} 
-                            className="hover:opacity-0" 
+                            className="transition-opacity ease-in duration-100 opacity-100 hover:opacity-0" 
                             alt=""
                             onClick={() => console.log("clickidick")} />
                         ))}
