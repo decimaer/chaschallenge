@@ -10,29 +10,32 @@ import Contact from './features/Misc/contact/Contact';
 import Profile from './features/User/profile/Profile';
 import Rules from './features/Misc/rules/Rules';
 import About from './features/Misc/about/About';
+import Tasks from './features/LandingPage/Tasks';
 import { UserContext } from './state/context';
 
 function App() {
    const [userState, setUserState] = useState({});
 
-   return (
-      <UserContext.Provider value={{ userState, setUserState }}>
-         <div className="App">
-            <Routes>
-               <Route path="/" element={<Home />} />
-               <Route path="/register" element={<Register />} />
-               <Route path="/login" element={<Login />} />
-               <Route path="/contact" element={<Contact />} />
-               <Route path="/tips" element={<Tips />} />
-               <Route path="/profile" element={<Profile />} />
-               <Route path="/rules" element={<Rules />} />
-               <Route path="/about" element={<About />} />
-               {/* Error page   */}
-               <Route path="*" element={<h1>Error 404: Page not found!</h1>} />
-            </Routes>
-         </div>
-      </UserContext.Provider>
-   );
-}
+  return (
+    <UserContext.Provider value={{userState, setUserState}}>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Temporary path while building */}
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+              <Route path="/contact" element={<Contact />} />
+          <Route path="/tips" element={<Tips />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/about" element={<About />} />
+          {/* Error page   */}
+          <Route path="*" element={<h1>Error 404: Page not found!</h1>} />
+        </Routes>
+      </div>
+    </UserContext.Provider>
+  )}
+
 
 export default App;
