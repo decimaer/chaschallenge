@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import './App.css'
-import Home from './features/LandingPage/Home'
+import './App.css';
+import Home from './features/LandingPage/Home';
 import Register from './features/User/register/Register';
 import Login from './features/User/login/Login';
 import Tips from './features/Misc/tips/Tips';
@@ -14,9 +14,7 @@ import Tasks from './features/LandingPage/Tasks';
 import { UserContext } from './state/context';
 
 function App() {
-
-	const [userState, setUserState] = useState({});
-
+   const [userState, setUserState] = useState({});
 
   return (
     <UserContext.Provider value={{userState, setUserState}}>
@@ -38,6 +36,6 @@ function App() {
       </div>
     </UserContext.Provider>
   )
-}
 
-export default App
+
+export default App;
