@@ -97,7 +97,6 @@ function Register() {
 
    return (
       <>
-         <Header />
          <h2>Registrera dig:</h2>
          <form onSubmit={handleSubmit(onSubmit)} className="flex-column">
             {isError && <ErrorMessage message={errorMessage} />}
@@ -160,7 +159,6 @@ function Register() {
 
             <button type="submit">Register</button>
          </form>
-         <Footer />
       </>
    );
 }
