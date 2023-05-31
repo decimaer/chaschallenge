@@ -61,7 +61,7 @@ const Menu = () => {
                               key={index}
                            >
                               <img src={item.icon} alt="" />
-                              <h4>{item.text}</h4>
+                              {item.text}
                            </Link>
                         );
                      })}
