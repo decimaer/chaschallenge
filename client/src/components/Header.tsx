@@ -1,7 +1,7 @@
 
 import Menu from './Menu';
-
 import logo from '/Assets_ChasChallenge/Icons/Logo/Property 1=greenblack, Property 2=landscape.svg'
+
 
 const Header = () => {
    //

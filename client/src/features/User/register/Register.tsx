@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
-import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
+import ErrorMessage from '../../../components/ErrorMessage';
+import { FormValues } from '../../../types/Register';
 
-import { Schema, z } from 'zod';
+import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+import { useContext } from 'react';
+import { UserContext } from '../../../state/context';
+
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const FormSchema = z.object({
@@ -24,93 +31,135 @@ const FormSchema = z.object({
    }),
 });
 
-function Register() {
-   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-      // event.preventDefault();
-
-      createAccount(data);
-      console.log(data);
-   };
-
-   const createAccount = (data: FieldValues) => {
-      console.log(import.meta.env.API_URL);
+const createAccount = async (data: FieldValues) => {
+   try {
+      console.log(import.meta.env.VITE_API_URL);
       const myHeaders = new Headers();
       myHeaders.append('Content-Type', 'application/json');
 
-      fetch(`http://127.0.0.1:8888/api/users`, {
-         method: 'POST',
-         headers: myHeaders,
-         body: JSON.stringify(data),
-         redirect: 'follow',
-      })
-         .then((response) => response.text())
-         .then((result) => console.log(result))
-         .catch((error) => console.log('error', error));
+      const response = await fetch(
+         `${import.meta.env.VITE_API_URL}/api/users`,
+         {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify(data),
+            redirect: 'follow',
+         }
+      );
+
+      if (!response.ok) throw new Error('Failed to register user.');
+
+      const resData = await response.json();
+
+      if (resData.status === 'fail') throw new Error(resData.message);
+
+      return resData;
+   } catch (error: any) {
+      console.error(error.message);
+      throw new Error(error.message);
+   }
+};
+
+function Register() {
+   const navigate = useNavigate();
+   const { userState, setUserState }: any = useContext(UserContext);
+   const [isError, setIsError] = useState<boolean>(false);
+   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+   const onSubmit: SubmitHandler<FieldValues> = async (fieldData) => {
+      try {
+         const data = await createAccount(fieldData);
+         console.log(data);
+
+         // save data to state
+         const userData = {
+            token: data.token,
+            user: data.user,
+            stats: data.stats,
+         };
+         setUserState(userData);
+
+         // navigate back to landing page
+         navigate('/');
+      } catch (error: any) {
+         setErrorMessage(error.message);
+         setIsError(true);
+      }
    };
 
    const {
       register,
       handleSubmit,
-      watch,
       formState: { errors },
-   } = useForm({
+   } = useForm<FormValues>({
       resolver: zodResolver(FormSchema),
    });
-   console.log(errors);
 
    return (
-      <div>
-         <Header />
-         <form onSubmit={handleSubmit(onSubmit)}>
+      <>
+         <h2>Registrera dig:</h2>
+         <form onSubmit={handleSubmit(onSubmit)} className="flex-column">
+            {isError && <ErrorMessage message={errorMessage} />}
+            {errors.name && <ErrorMessage message={errors.name.message} />}
             <label>
                <input
                   type="text"
-                  placeholder="Enter your Username"
+                  placeholder="Skapa ett användarnamn"
                   {...register('name')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
             <label>
+               {errors.email && <ErrorMessage message={errors.email.message} />}
                <input
                   type="email"
-                  placeholder="Enter your Email"
+                  placeholder="Skriv din mejl"
                   {...register('email')}
                />
-               {/* <p>{errors.email && errors.email.message}</p> */}
-            </label>{' '}
-            <br />
+            </label>
+            {errors.password && (
+               <ErrorMessage message={errors.password.message} />
+            )}
             <label>
                <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="Skapa lösenord"
                   {...register('password')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
+            {errors.passwordConfirm && (
+               <ErrorMessage message={errors.passwordConfirm.message} />
+            )}
             <label>
                <input
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder="Bekräfta lösenord"
                   {...register('passwordConfirm')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
+            {errors.location && (
+               <ErrorMessage message={errors.location.message} />
+            )}
             <label>
                <input
                   type="text"
-                  placeholder="Location"
+                  placeholder="Välj län"
                   {...register('location')}
                />
-            </label>{' '}
-            <br />
+            </label>
+
+            {errors.agreeTerms && (
+               <ErrorMessage message={errors.agreeTerms.message} />
+            )}
             <label>
                <input type="checkbox" {...register('agreeTerms')} />
-            </label>{' '}
-            <br />
+            </label>
+
             <button type="submit">Register</button>
          </form>
-         <Footer />
-      </div>
+      </>
    );
 }
 

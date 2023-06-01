@@ -6,10 +6,53 @@
 
 @layer base {
    html {
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Manrope', 'Josefin Sans', sans-serif;
+      box-sizing: border-box;
    }
-   h1, h2, h3, h4, h5, h6 {
+   h1,
+   h2,
+   h3,
+   h4 {
+      font-family: 'Josefin Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 140%;
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+
+      /* Sun light */
+      color: #fff7b2;
+   }
+
+   input {
+      border: 3px solid #5d34ff;
+      border-radius: 15px;
+      height: 50px;
+      width: 100%;
+      padding: 1em;
+      margin-bottom: 1em;
+      font-weight: bold;
+
+      display: flex;
+      align-items: center;
+   }
+
+   input::placeholder {
+      font-style: normal;
+      font-size: 18px;
+      line-height: 18px;
       font-family: 'Josefin Sans';
       text-transform: uppercase;
+      color: #353739;
+      opacity: 1;
+   }
+
+   input[type='checkbox'] {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fc6026;
+      border-radius: 2px;
    }
 }
