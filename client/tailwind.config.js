@@ -7,6 +7,14 @@ export default {
             josefin: ['Josefin Sans', 'sans-serif'],
             manrope: ['Manrope', 'sans-serif'],
          },
+         colors: {
+            purplePrimary: "#291242",
+            purpleHeader: "#6328A0",
+            fontGreen: "#AAE23B",
+            fontYellow: "#FFE400",
+            fontDialogue: "#FFF7B2",
+            fontPink: "#F94FAF"
+         }
       },
    },
    plugins: [],
