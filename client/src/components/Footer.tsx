@@ -1,13 +1,16 @@
 import React from 'react';
 
+import fb from '../../public/Assets_ChasChallenge/Icons/Menyikoner/facebook.svg';
+import ig from '../../public/Assets_ChasChallenge/Icons/Menyikoner/Instagram.svg';
+
 const Footer = () => {
    return (
-      <footer>
+      <footer className="bg-purpleHeader flex justify-center items-center space-x-4">
          <a href="https://www.facebook.com">
-            <img src="facebook_icon" alt="Facebook" />
+            <img className="w-7 " src={fb} alt="Facebook" />
          </a>
-         <a href="https://www.twitter.com">
-            <img src="twitter_icon" alt="twitter" />
+         <a href="https://www.instagram.com">
+            <img className="w-7" src={ig} alt="instagram" />
          </a>
       </footer>
    );

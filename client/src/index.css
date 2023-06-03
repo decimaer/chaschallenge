@@ -9,6 +9,14 @@
       font-family: 'Manrope', 'Josefin Sans', sans-serif;
       box-sizing: border-box;
    }
+   body #root {
+      height: 100vh;
+   }
+   .App {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 55px 1fr 43px;
+   }
    h1,
    h2,
    h3,
