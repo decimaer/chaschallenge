@@ -22,20 +22,28 @@ function App() {
       <UserContext.Provider value={{ userState, setUserState }}>
          <div className="App">
             <Header />
-            <Routes>
-               <Route path="/" element={<Home />} />
-               {/* Temporary path while building */}
-               <Route path="/tasks" element={<Tasks />} />
-               <Route path="/register" element={<Register />} />
-               <Route path="/login" element={<Login />} />
-               <Route path="/contact" element={<Contact />} />
-               <Route path="/tips" element={<Tips />} />
-               <Route path="/profile" element={<Profile />} />
-               <Route path="/rules" element={<Rules />} />
-               <Route path="/about" element={<About />} />
-               {/* Error page   */}
-               <Route path="*" element={<h1>Error 404: Page not found!</h1>} />
-            </Routes>
+            <main
+               className="flex flex-col justify-center items-center 
+        pt-[103px] bg-purplePrimary"
+            >
+               <Routes>
+                  <Route path="/" element={<Home />} />
+                  {/* Temporary path while building */}
+                  <Route path="/tasks" element={<Tasks />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/tips" element={<Tips />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/rules" element={<Rules />} />
+                  <Route path="/about" element={<About />} />
+                  {/* Error page   */}
+                  <Route
+                     path="*"
+                     element={<h1>Error 404: Page not found!</h1>}
+                  />
+               </Routes>
+            </main>
             <Footer />
          </div>
       </UserContext.Provider>

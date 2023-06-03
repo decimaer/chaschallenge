@@ -9,6 +9,12 @@
       font-family: 'Manrope', 'Josefin Sans', sans-serif;
       box-sizing: border-box;
    }
+   body #root {
+      height: 100vh;
+   }
+   .App {
+      height: 100%;
+   }
    h1,
    h2,
    h3,
