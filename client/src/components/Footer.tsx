@@ -5,7 +5,7 @@ import ig from '../../public/Assets_ChasChallenge/Icons/Menyikoner/Instagram.svg
 
 const Footer = () => {
    return (
-      <footer className="bg-purpleHeader flex justify-center items-center  h-[43px] space-x-4">
+      <footer className="bg-purpleHeader flex justify-center items-center space-x-4">
          <a href="https://www.facebook.com">
             <img className="w-7 " src={fb} alt="Facebook" />
          </a>
