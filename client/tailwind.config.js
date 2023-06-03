@@ -16,6 +16,19 @@ export default {
             fontPink: "#F94FAF"
          }
       },
+      keyframes: {
+         'slide-in': {
+           '0%': {
+             transform: 'translateY(-1000px)',
+           },
+           '100%': {
+             transform: 'translateY(0)',
+           },
+         },
+       },
+       animation: {
+         'slide-in': 'slide-in 0.5s both',
+       },
    },
    plugins: [],
 };

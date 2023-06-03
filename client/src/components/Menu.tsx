@@ -54,7 +54,11 @@ const Menu = () => {
             className='h-[19px] w-[30px] mr-[19px]'
             onClick={() => setIsOpen(!isOpen)}
          />
-         <div className='bg-purpleHeader absolute right-0 mt-9 rounded-bl-lg'>
+         <div
+        className={`bg-purpleHeader absolute right-0 mt-9 rounded-bl-lg ${
+          isOpen ? "animate-slide-in" : ""
+        }`}
+      >
             {
                //Is the menu open?
                isOpen ? (
