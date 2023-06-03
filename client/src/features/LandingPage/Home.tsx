@@ -1,30 +1,43 @@
-import React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import { useState } from 'react';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
+
+import { useContext } from 'react';
+import { UserContext } from '../../state/context';
+
+import Tasks from './Tasks';
 
 import imgController from '/public/Assets_ChasChallenge/Icons/Logo/Property 1=greenpinklight, Property 2=pictorial.svg';
 
 const Home = () => {
+   const { userState, setUserState }: any = useContext(UserContext);
+
+   const [isLoggedIn, setLoggedIn] = useState(userState.token);
+
    return (
       <>
-         <img className="h-24" src={imgController} />
-         <h2>Tänk globalt agera lokalt!</h2>
-         <p>En inbjudande kul text som får folk att vilja gå med</p>
+         {isLoggedIn ? (
+            <Tasks />
+         ) : (
+            <>
+               <img className="h-24" src={imgController} />
+               <h2>Tänk globalt agera lokalt!</h2>
+               <p>En inbjudande kul text som får folk att vilja gå med</p>
 
-         <section>
-            <p>Vill du också var med</p>
-            <Link to={'register'}>
-               <Button text="Skapa ett konto" />
-            </Link>
-         </section>
-         <section>
-            <p>Redan en i gänget?</p>
-            <Link to={'login'}>
-               <Button text="Logga in" />
-            </Link>
-         </section>
+               <section>
+                  <p>Vill du också var med</p>
+                  <Link to={'register'}>
+                     <Button text="Skapa ett konto" />
+                  </Link>
+               </section>
+               <section>
+                  <p>Redan en i gänget?</p>
+                  <Link to={'login'}>
+                     <Button text="Logga in" />
+                  </Link>
+               </section>
+            </>
+         )}
       </>
    );
 };
