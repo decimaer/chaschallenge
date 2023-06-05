@@ -28,8 +28,9 @@ const Home = () => {
                   </p>
                   <Link to={'register'}>
                      <Button
+                        type="button"
                         text="Registrera dig"
-                        styling="bg-buttonGreen w-full h-[50px] rounded-[15px] font-manrope font-bold"
+                        preset="green"
                      />
                   </Link>
                </section>
@@ -38,10 +39,7 @@ const Home = () => {
                      Jag är redan i gänget!
                   </p>
                   <Link to={'login'}>
-                     <Button
-                        text="Logga in"
-                        styling="bg-buttonPink w-full h-[50px] rounded-[15px] font-manrope font-bold"
-                     />
+                     <Button type="button" text="Logga in" preset="pink" />
                   </Link>
                </section>
             </>

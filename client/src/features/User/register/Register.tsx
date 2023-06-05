@@ -21,7 +21,7 @@ const FormSchema = z.object({
       .min(8)
       .regex(/^(?=.*[!@#$%^&*])/, {
          message:
-            'Password must contain at least one special character (!@#$%^&*), and must be atleast 8 characters.',
+            'Password must contain at least one special character (!@#$%^&*).',
       }),
    passwordConfirm:
       z.string() /* .refine(passwordConfirm => passwordConfirm === FormSchema.password, { message: "Passwords do not match." }) */,
