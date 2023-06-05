@@ -8,27 +8,29 @@ export default {
             manrope: ['Manrope', 'sans-serif'],
          },
          colors: {
-            purplePrimary: "#291242",
-            purpleHeader: "#6328A0",
-            fontGreen: "#AAE23B",
-            fontYellow: "#FFE400",
-            fontDialogue: "#FFF7B2",
-            fontPink: "#F94FAF"
-         }
+            purplePrimary: '#291242',
+            purpleHeader: '#6328A0',
+            fontGreen: '#AAE23B',
+            fontYellow: '#FFE400',
+            fontDialogue: '#FFF7B2',
+            fontPink: '#F94FAF',
+            buttonGreen: '#AAE23B',
+            buttonPink: '#F94FAF',
+         },
       },
       keyframes: {
          'slide-in': {
-           '0%': {
-             transform: 'translateY(-1000px)',
-           },
-           '100%': {
-             transform: 'translateY(0)',
-           },
+            '0%': {
+               transform: 'translateY(-1000px)',
+            },
+            '100%': {
+               transform: 'translateY(0)',
+            },
          },
-       },
-       animation: {
+      },
+      animation: {
          'slide-in': 'slide-in 0.5s both',
-       },
+      },
    },
    plugins: [],
 };

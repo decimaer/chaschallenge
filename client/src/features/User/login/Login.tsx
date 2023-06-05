@@ -61,8 +61,7 @@ function Login() {
    console.log(errors);
 
    return (
-      <div>
-         <Header />
+      <>
          <h2>Logga in</h2>
          <form onSubmit={handleSubmit(onSubmit)}>
             <label>
@@ -84,8 +83,7 @@ function Login() {
             <p>Glömt ditt lösenord?</p>
             <button type="submit">Logga in</button>
          </form>
-         <Footer />
-      </div>
+      </>
    );
 }
 
