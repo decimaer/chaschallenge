@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Footer from '../../../components/Footer';
-import Header from '../../../components/Header';
 import { useForm, Resolver, FieldValues, SubmitHandler } from 'react-hook-form';
 
 import { Schema, z } from 'zod';
@@ -62,7 +60,6 @@ function Login() {
 
    return (
       <div>
-         <Header />
          <h2>Logga in</h2>
          <form onSubmit={handleSubmit(onSubmit)}>
             <label>
@@ -84,7 +81,6 @@ function Login() {
             <p>Glömt ditt lösenord?</p>
             <button type="submit">Logga in</button>
          </form>
-         <Footer />
       </div>
    );
 }
