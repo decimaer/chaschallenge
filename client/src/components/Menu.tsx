@@ -51,7 +51,7 @@ const Menu = () => {
             id="menu"
             src={isOpen ? hamburgerOpen : hamburgerClosed}
             alt={isOpen ? 'Close Menu' : 'Open Menu'}
-            className='h-[19px] w-[30px] mr-[19px]'
+            className='h-[19px] w-[30px] mr-[19px] hover:cursor-pointer'
             onClick={() => setIsOpen(!isOpen)}
          />
          <div
