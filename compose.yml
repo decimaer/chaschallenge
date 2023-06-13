@@ -1,0 +1,20 @@
+# Run with docker compose up -d
+
+services:
+  mongo:
+   image: mongo:6.0
+   restart: always # Restart policy to always restart, regardless exit codes & docker upgrade.
+   volumes:
+     - /data/db:/data/db
+
+  application: 
+    image: registry.gitlab.com/sm0rezdev/chaschallenge:latest
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=8888
+      - DATABASE_URL=mongodb://mongo
+      - JWT_SECRET_KEY=nk2n7tO2kDo3HC0IFgN1ol1x8C5yLGT0
+      - JWT_EXPIRES_IN=30d
+    ports:
+      - 8888:8888 # port mapping external:internal
