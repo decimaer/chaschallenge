@@ -1,22 +1,19 @@
-import React from 'react';
 import Menu from './Menu';
-import "./Menu.css"
-import "./Header.css"
+import logo from '/Assets_ChasChallenge/Icons/Logo/Property 1=greenblack, Property 2=landscape.svg';
 
 const Header = () => {
+   //
 
-
-
-    //
-
-
-    return (
-        <header>
-            <img src="https://placehold.co/50" alt="" />
-            <h2>GREEN HERO</h2>
+   return (
+      <header className="bg-purpleHeader flex items-center justify-between">
+         <div className="w-1/2 ml-[19px]">
+            <img src={logo} alt="Green Hero logo" />
+         </div>
+         <div className="w-1/2 flex justify-end">
             <Menu />
-        </header>
-    );
+         </div>
+      </header>
+   );
 };
 
 export default Header;
