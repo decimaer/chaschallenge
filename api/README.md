@@ -4,7 +4,7 @@
 
 -  install config.env in api root folder with `NODE_ENV` set to `development`
 -  Run `npm install`
--  Run `npm run dev`
+-  Run `npm run start:dev`
 
 ## config.env
 

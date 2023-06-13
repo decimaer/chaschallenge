@@ -1,10 +1,6 @@
-# chaschallenge
+# Chas Challenge - Green Hero
 
-## `.env.local` file
+## How to run
+See readme for api and [client](/api/README.md).
 
-Examples are shown as values.
-
-```
-# Root url to the API (without '/' at the end)
-VITE_API_URL='http://localhost:8888'
-```
+[Github - ChasChallenge](https://github.com/decimaer/chaschallenge)

@@ -7,7 +7,7 @@ import { UserContext } from '../../state/context';
 
 import Tasks from './Tasks';
 
-import imgController from '/public/Assets_ChasChallenge/Icons/Logo/Property 1=greenpinklight, Property 2=pictorial.svg';
+import imgMainLogo from '/public/Assets_ChasChallenge/Icons/Logo/App\ Icon.png';
 
 const Home = () => {
    const { userState, setUserState }: any = useContext(UserContext);
@@ -20,10 +20,10 @@ const Home = () => {
             <Tasks />
          ) : (
             <>
-               <img className="h-24" src={imgController} />
-               <h2>Tänk globalt agera lokalt!</h2>
+               <img className="h-[auto] w-[28vw] mb-8" src={imgMainLogo} />
+               <h2 className='text-fontDialogue mb-4'>Tänk globalt agera lokalt!</h2>
                <section className="w-full flex-col mb-[35px]">
-                  <p className="text-center text-fontDialogue text-[18px] ">
+                  <p className="text-center text-fontDialogue text-[18px] mb-2">
                      Vill du också vara med?
                   </p>
                   <Link to={'register'}>
@@ -35,7 +35,7 @@ const Home = () => {
                   </Link>
                </section>
                <section className="w-full flex-col">
-                  <p className="text-center text-fontDialogue text-[18px]">
+                  <p className="text-center text-fontDialogue text-[18px] mb-2">
                      Jag är redan i gänget!
                   </p>
                   <Link to={'login'}>
