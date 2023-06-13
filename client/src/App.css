@@ -2,9 +2,3 @@
    margin: 0;
    padding: 0;
 }
-
-.App {
-   height: 100%;
-   display: grid;
-   grid-template-rows: 55px 1fr 43px;
-}

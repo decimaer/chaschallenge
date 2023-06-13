@@ -74,8 +74,8 @@ function Register() {
          // save data to state
          const userData = {
             token: data.token,
-            user: data.user,
-            stats: data.stats,
+            user: data.data.user,
+            stats: data.data.stats,
          };
          setUserState(userData);
 

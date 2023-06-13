@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react';
 
 import taskOneDefault from '/Assets_ChasChallenge/Cards/Taskcards/Property 1=samlat, Property 2=default.svg';
 import taskOneHover from '/Assets_ChasChallenge/Cards/Taskcards/Property 1=samlat, Property 2=hover.svg';
@@ -39,13 +40,18 @@ const UserTasks = () => {
         { src: taskFourInactive },
      ];
 
+     const [isHover, setHover] = useState(false)
+
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-2 mt-8 mb-8">
+    <div className="grid grid-cols-2 grid-rows-2 gap-4 w-fit mt-8 mb-8">
             {hoverTasks.map((task, index) => (
-               <img key={index} src={task.src} alt="" />
+               <img key={index} src={task.src} alt="" 
+               className="transition-opacity ease-in duration-150 opacity-100 hover:opacity-0"
+               
+               />
             ))}
 
-            <div className="grid grid-cols-2 grid-rows-2 gap-2 absolute">
+            <div className="grid grid-cols-2 grid-rows-2 gap-4 absolute">
                {defaultTasks.map((task, index) => (
                   <img
                      key={index}
@@ -53,6 +59,7 @@ const UserTasks = () => {
                      className="transition-opacity ease-in duration-150 opacity-100 hover:opacity-0"
                      alt=""
                      onClick={() => console.log('clickidick')}
+                     onMouseEnter={() => {}}
                   />
                ))}
             </div>

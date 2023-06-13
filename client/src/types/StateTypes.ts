@@ -1,11 +1,11 @@
 export interface UserData {
-   token: string;
-   user: {
-      _id: string;
-      email: string;
-      name: string;
+   token?: string;
+   user?: {
+      _id?: string;
+      email?: string;
+      name?: string;
    };
-   stats: {};
+   stats?: {};
 }
 
 export interface UserContextType {
