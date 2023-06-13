@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Footer from '../../../components/Footer';
-import Header from '../../../components/Header';
 import { useForm, Resolver, FieldValues, SubmitHandler } from 'react-hook-form';
 
 import { Schema, z } from 'zod';
@@ -8,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useContext } from 'react';
 import { UserContext } from '../../../state/context';
+import Button from '../../../components/Button';
 
 const LoginSchema = z.object({
    email: z.string().email(),
@@ -61,31 +60,27 @@ function Login() {
    console.log(errors);
 
    return (
-      <div>
-         <Header />
-         <h2>Logga in</h2>
+      <>
+         <h2>Logga in:</h2>
          <form onSubmit={handleSubmit(onSubmit)}>
             <label>
                <input
                   type="text"
                   {...register('email')}
-                  placeholder="Användarnamn eller e-post"
+                  placeholder="Användarnamn eller mejl"
                />
             </label>{' '}
-            <br />
-            <label>
-               Lösenord:
-               <input
-                  type="password"
-                  {...register('password')}
-                  placeholder="Lösenord"
-               />
-            </label>
-            <p>Glömt ditt lösenord?</p>
-            <button type="submit">Logga in</button>
+            <input
+               type="password"
+               {...register('password')}
+               placeholder="Lösenord"
+            />
+            <p className="text-center text-fontDialogue text-[14px] text-white underline">
+               Har du glömt ditt lösenord? Klicka här!
+            </p>
+            <Button text="Logga in" type="submit" preset="pink" />
          </form>
-         <Footer />
-      </div>
+      </>
    );
 }
 

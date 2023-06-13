@@ -22,18 +22,24 @@ const Home = () => {
             <>
                <img className="h-24" src={imgController} />
                <h2>Tänk globalt agera lokalt!</h2>
-               <p>En inbjudande kul text som får folk att vilja gå med</p>
-
-               <section>
-                  <p>Vill du också var med</p>
+               <section className="w-full flex-col mb-[35px]">
+                  <p className="text-center text-fontDialogue text-[18px] ">
+                     Vill du också vara med?
+                  </p>
                   <Link to={'register'}>
-                     <Button text="Skapa ett konto" />
+                     <Button
+                        type="button"
+                        text="Registrera dig"
+                        preset="green"
+                     />
                   </Link>
                </section>
-               <section>
-                  <p>Redan en i gänget?</p>
+               <section className="w-full flex-col">
+                  <p className="text-center text-fontDialogue text-[18px]">
+                     Jag är redan i gänget!
+                  </p>
                   <Link to={'login'}>
-                     <Button text="Logga in" />
+                     <Button type="button" text="Logga in" preset="pink" />
                   </Link>
                </section>
             </>
