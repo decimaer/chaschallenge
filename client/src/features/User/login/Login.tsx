@@ -62,7 +62,7 @@ function Login() {
    return (
       <>
          <h2>Logga in:</h2>
-         <form onSubmit={handleSubmit(onSubmit)}>
+         <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
             <label>
                <input
                   type="text"
@@ -75,7 +75,7 @@ function Login() {
                {...register('password')}
                placeholder="Lösenord"
             />
-            <p className="text-center text-fontDialogue text-[14px] text-white underline">
+            <p className="text-center text-[14px] text-white underline">
                Har du glömt ditt lösenord? Klicka här!
             </p>
             <Button text="Logga in" type="submit" preset="pink" />

@@ -14,17 +14,19 @@ import Tasks from './features/LandingPage/Tasks';
 import { UserContext } from './state/context';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { UserData } from './types/StateTypes';
+
 
 function App() {
-   const [userState, setUserState] = useState({});
+   const [userState, setUserState] = useState<UserData>({});
 
    return (
       <UserContext.Provider value={{ userState, setUserState }}>
          <div className="App">
             <Header />
             <main
-               className="flex flex-col justify-center items-stretch 
-        pt-[103px] bg-purplePrimary px-[25px]"
+               className="flex flex-col justify-center items-center 
+         bg-purplePrimary px-[25px]"
             >
                <Routes>
                   <Route path="/" element={<Home />} />
