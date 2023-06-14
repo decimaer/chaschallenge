@@ -13,6 +13,8 @@ import { UserContext } from '../../../state/context';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import Button from '../../../components/Button';
+
 const FormSchema = z.object({
    name: z.string().min(1, { message: 'Username is required.' }),
    email: z.string().email(),
@@ -97,8 +99,8 @@ function Register() {
 
    return (
       <>
-         <h2>Registrera dig:</h2>
-         <form onSubmit={handleSubmit(onSubmit)} className="flex-column">
+         <h2 className='text-fontDialogue mb-2'>Registrera dig:</h2>
+         <form onSubmit={handleSubmit(onSubmit)} className="flex-column w-full mb-4">
             {isError && <ErrorMessage message={errorMessage} />}
             {errors.name && <ErrorMessage message={errors.name.message} />}
             <label>
@@ -153,11 +155,15 @@ function Register() {
             {errors.agreeTerms && (
                <ErrorMessage message={errors.agreeTerms.message} />
             )}
-            <label>
-               <input type="checkbox" {...register('agreeTerms')} />
+            <label className='flex flex-row text-fontDialogue mb-4'>
+               <input className='mr-2' type="checkbox" {...register('agreeTerms')} />
+               <p>
+
+                  Jag har läst villkoren och integritetspolicyn och godkänner dem.
+               </p>
             </label>
 
-            <button type="submit">Register</button>
+               <Button preset='green' type="submit" text='Registrera dig'/>
          </form>
       </>
    );
